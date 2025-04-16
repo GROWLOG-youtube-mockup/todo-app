@@ -17,9 +17,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "preview": "vite preview",
-    "lint": "eslint '**/*.js' --fix"
+    "lint": "eslint '**/*.js' --fix",
+    "prepare": "husky install",
+    "format": "prettier --write .",
+    "commitlint": "commitlint --edit"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
     "@eslint/js": "^9.24.0",
     "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -32,6 +37,7 @@
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-unused-imports": "^4.1.4",
     "globals": "^16.0.0",
+    "husky": "^9.1.7",
     "import": "^0.0.6",
     "prettier": "^3.5.3"
   }
