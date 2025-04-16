@@ -1,0 +1,38 @@
+{
+  "name": "package.json",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/GROWLOG-youtube-mockup/todo-app#readme",
+  "bugs": {
+    "url": "https://github.com/GROWLOG-youtube-mockup/todo-app/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GROWLOG-youtube-mockup/todo-app.git"
+  },
+  "license": "ISC",
+  "author": "GROWLOG",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "preview": "vite preview",
+    "lint": "eslint '**/*.js' --fix"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.24.0",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-cypress": "^2.12.1",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-prettier": "^5.2.6",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-unused-imports": "^4.1.4",
+    "globals": "^16.0.0",
+    "import": "^0.0.6",
+    "prettier": "^3.5.3"
+  }
+}

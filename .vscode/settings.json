@@ -1,8 +1,17 @@
 {
+  // 저장 시 자동 포맷
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // ESLint 확장 설정
   "eslint.validate": ["javascript", "javascriptreact"],
   "eslint.useFlatConfig": true,
+  // Prettier를 기본 포맷터로 설정
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // 저장 시 ESLint 자동 수정
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.fixAll.eslint": "explicit"
+  },
+  // ESLint 자동 실행
   "eslint.run": "onType",
   "eslint.format.enable": true
 }
