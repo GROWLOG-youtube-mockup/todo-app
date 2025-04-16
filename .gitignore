@@ -17,7 +17,7 @@ ehthumbs.db
 Icon?
 Desktop.ini
 
-.vscode/
+
 .idea/
 *.sublime-workspace
 *.sublime-project
