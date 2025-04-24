@@ -1,0 +1,69 @@
+@import './variables.css';
+
+/* 기본 HTML, BODY 스타일 */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
+}
+
+/* 전체 화면을 채우는 컨테이너 - Flexbox 활용 */
+.app-container {
+  display: flex;
+  justify-content: center; /* 수평 중앙 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
+  min-height: 100vh; /* 전체 화면 높이 */
+  background-color: #e8e8e8;
+}
+
+/* 모바일 크기 박스 스타일 */
+.mobile-box {
+  width: var(--container-width); /* 모바일 기기 기준 너비, 필요에 따라 조정 */
+  height: var(--container-height); /* 모바일 기기 기준 높이 */
+  background-color: var(--color-background);
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; /* 내부 컨텐츠가 넘칠 경우 스크롤 생성 */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 버튼 컨테이너 스타일 (삭제필요)*/
+.button-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* 네비게이션 버튼 스타일(삭제필요) */
+.nav-button {
+  display: inline-block;
+  background-color: var(--color-primary);
+  color: white;
+  padding: 12px 24px;
+  border-radius: var(--raious-md);
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition:
+    background-color 0.3s,
+    transform 0.2s;
+}
+
+/* 스크롤바 제거 */
+body {
+  -ms-overflow-style: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}

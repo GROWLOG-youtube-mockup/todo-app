@@ -1,0 +1,50 @@
+:root {
+  /* Font family */
+  --font-family: 'Jost', sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+
+  --color-primary: #9395d3; /* 헤더 색상 */
+  --color-secondary: #d6d7ef; /* 메인페이지 배경색 */
+  --color-complted-background: #e6e6f2; /* 선택된 요소 프로필, 메인 */
+  --color-background: #f5f5f5;
+
+  --color-text: #000000;
+  --color-text-white: #ffffff; /* 헤더 텍스트 */
+  --color-text-highlight: #b3b7ee;
+  --color-text-highlight-dark: #5a4d9a; /* 선택된 요소 프로필, 메인 */
+  --color-text-gray: #8b8787; /* 비어있는 내용 추가/수정 페이지 */
+  --color-text-light-gray: #aaaaaa; /* 메인상단 진척도 */
+
+  --color-priority-1: #ff4d4d;
+  --color-priority-2: #ffd700;
+  --color-priority-3: #4caf50;
+
+  --spacing-xs: 4px;
+  --spacing-sm: 8px; /* 목록 좌우 여백 */
+  --spacing-md: 16px; /* 추가/수정버튼 */
+  --spacing-md2: 20px; /* 헤더 하단 패딩 */
+  --spacing-lg: 24px;
+
+  --radious-xs: 4px;
+  --radious-sm: 8px;
+  --radious-md: 15px; /* todo 목록 */
+  --radious-lg: 40px; /* 메인상단 진척도 */
+
+  --font-header: 24px; /* (헤더 프로필닉네임) 텍스트 */
+  --font-button: 20px; /* (추가/수정버튼) 텍스트 */
+  --font-body-bold: 16px;
+  --font-body: 13px;
+  --font-body-small: 10px;
+
+  --container-width: 414px; /* 모바일 기기 기준 너비, 필요에 따라 조정 */
+  --container-height: 810px; /* 모바일 기기 기준 높이 */
+  --todo-width: 398px; /* todo요소 너비 */
+  --todo-height: 80px; /* todo요소 높이 */
+  --header-height: 120px; /* 헤더 높이 */
+  --button-width: 382px;
+  --button-height: 65px; /* 추가/수정 버튼 높이 */
+  --button-width-sm: 90px;
+  --button-height-sm: 34px;
+  --dot-witdh: 13px; /* todo요소 dot 너비 */
+}

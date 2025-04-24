@@ -1,0 +1,32 @@
+@import './variables.css';
+
+.header {
+  width: 100%;
+  height: var(--header-height);
+  min-height: var(--header-height); /* 최소 높이 추가 */
+  background-color: var(--color-primary);
+  padding-bottom: var(--spacing-md2);
+  display: flex;
+  align-items: flex-end; /* 헤더 내용을 아래쪽으로 정렬 */
+  box-sizing: border-box;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  padding: 0 var(--spacing-md);
+  width: 100%;
+}
+
+.arrow-left {
+  display: flex;
+  padding-left: var(--spacing-sm);
+  padding-right: var(--spacing-md);
+}
+
+.header-text {
+  font-size: var(--font-header);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-white);
+  text-decoration: none;
+}
