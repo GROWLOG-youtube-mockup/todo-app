@@ -7,16 +7,10 @@
 ```
 eslint
 @eslint/js
-eslint-config-airbnb
 eslint-config-airbnb-base
 eslint-config-prettier
 eslint-plugin-prettier
-eslint-import-resolver-alias
-eslint-plugin-simple-import-sort
-eslint-plugin-unused-imports
-eslint-config-airbnb-base
 eslint-plugin-import
-eslint-plugin-cypress
 globals
 ```
 
