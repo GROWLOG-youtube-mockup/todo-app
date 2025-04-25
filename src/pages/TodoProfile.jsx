@@ -10,30 +10,32 @@ function TodoProfile() {
   return (
     <div className="page-container">
       <Header title="PROFILE" />
-      <div className="profile-container">
-        <div className="avatar-container">
+
+      <main className="profile-container">
+        <section className="avatar-container">
           <img src={avatarImg} alt="Profile Avatar" className="profile-avatar" />
           <h2 className="profile-name">GrowLog</h2>
-        </div>
-      </div>
+        </section>
 
-      <TabNav />
-      <div className="tab-content">
-        {currentTab === '할 일' && <TodoTab />}
-        {currentTab === '게시글' && <PostsTab />}
-      </div>
+        <TabNav />
+
+        <section className="tab-content">
+          {currentTab === '할 일' && <TodoTab />}
+          {currentTab === '게시글' && <PostsTab />}
+        </section>
+      </main>
     </div>
   );
 }
 
 export default TodoProfile;
 
-const tabs = ['할 일', '게시글'];
 const TabNav = () => {
+  const tabs = ['할 일', '게시글'];
   const { currentTab, setCurrentTab } = useTabStore();
 
   return (
-    <div className="profile-tabs">
+    <nav className="profile-tabs">
       {tabs.map((tab) => (
         <button
           key={tab}
@@ -43,7 +45,7 @@ const TabNav = () => {
           {tab}
         </button>
       ))}
-    </div>
+    </nav>
   );
 };
 
