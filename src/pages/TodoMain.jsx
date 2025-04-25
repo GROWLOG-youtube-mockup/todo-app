@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../components/Header.jsx';
-import { useTodoStore } from '../stores/useTodoStore.jsx';
 
+import Header from '../components/Header.jsx';
+import { useTodoStore } from '../stores/useTodoStore.js';
+import '../style/TodoMain.css';
 
 function TodoMain() {
   // 로컬 상태
@@ -28,20 +29,68 @@ function TodoMain() {
     setShowDropDown(!showDropDown);
   }
 
+  function handleSortChange(option) {
+    setSortOption(option);
+    setShowDropDown(false);
+  }
+
+  // 중요도에 따른 색 결정
+  function getPriorityColorClass(priority) {
+    switch (priority) {
+      case 'high':
+        return 'priority-3';
+      case 'medium':
+        return 'priority-2';
+      case 'low':
+      default:
+        return 'priority-1';
+    }
+  }
+
   return (
     <div className="todo-container">
-      <Header
-        title="TODO APP"
-        centerTitle={true}
-        showBackArrow={false}
-        showProfile={true}
-        showShare={true}
-      />
+      <div className="todo-header">
+        <Header
+          title="TODO APP"
+          centerTitle={true}
+          showBackArrow={false}
+          showProfile={true}
+          showShare={true}
+        />
+      </div>
       <div className="filter-sort-container">
         <div className="filter-buttons">
-          
+          {filters.map((filter) => (
+            <button
+              key={filter}
+              className={`filter-button ${activeFilter === filter ? 'active' : ''}`}
+              onClick={() => setActiveFilter(filter)}
+            >
+              {filter}
+            </button>
+          ))}
+        </div>
+        <div className="sort-dropdown">
+          <button className="sort-button" onClick={toggleDropDown}>
+            {sortOption} ▼
+          </button>
+
+          {showDropDown && (
+            <div className="dropdown-menu">
+              {sortOptions.map((option) => (
+                <div
+                  key={option}
+                  className="dropdown-item"
+                  onClick={() => handleSortChange(option)}
+                >
+                  {option}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
+      <button className="add-todo-button">+</button>
     </div>
   );
 }
