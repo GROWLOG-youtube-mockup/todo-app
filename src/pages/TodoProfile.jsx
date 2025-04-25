@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from 'react';
 
+import avatarImg from '../assets/avatar.svg';
 import Header from '../components/Header.jsx';
 import useTabStore from '../stores/useTabStore.js';
+import '../style/TodoProfile.css';
 
 function TodoProfile() {
   const { currentTab } = useTabStore();
   return (
     <div className="page-container">
       <Header title="PROFILE" />
+      <div className="profile-container">
+        <div className="avatar-container">
+          <img src={avatarImg} alt="Profile Avatar" className="profile-avatar" />
+          <h2 className="profile-name">GrowLog</h2>
+        </div>
+      </div>
 
-      {/*작업시 삭제후 진행해주세요*/}
-      <h1>프로필 페이지</h1>
       <TabNav />
-      <div style={{ width: '80%' }}>
+      <div className="tab-content">
         {currentTab === '할 일' && <TodoTab />}
         {currentTab === '게시글' && <PostsTab />}
       </div>
@@ -27,12 +33,12 @@ const TabNav = () => {
   const { currentTab, setCurrentTab } = useTabStore();
 
   return (
-    <div>
+    <div className="profile-tabs">
       {tabs.map((tab) => (
         <button
           key={tab}
           onClick={() => setCurrentTab(tab)}
-          className={currentTab === tab ? 'currentTab' : ''}
+          className={currentTab === tab ? 'tab-button currentTab' : 'tab-button'}
         >
           {tab}
         </button>
@@ -82,7 +88,6 @@ const TodoListContainer = ({ isCompleted }) => {
   return (
     <>
       <div
-        className="accordion-header"
         onClick={toggleAcordion}
         style={{
           display: 'flex',
@@ -90,22 +95,20 @@ const TodoListContainer = ({ isCompleted }) => {
           alignContent: 'center'
         }}
       >
-        <h3>{isCompleted == 'true' ? '완료된 할 일' : '해야 할 일'}</h3>
-        <p>{isOpen ? '-' : '+'}</p>
+        <span className="todo-count">{isCompleted == 'true' ? '완료된 할 일' : '해야 할 일'}</span>
+        <span className="todo-count">{isOpen ? '-' : '+'}</span>
       </div>
 
-      <div>
-        {isOpen && (
-          <ul>
-            {filteredTodos.map((todo) => (
-              <li key={todo.id}>{todo.title}</li>
-            ))}
-          </ul>
-        )}
-      </div>
+      {isOpen &&
+        filteredTodos.map((todo) => (
+          <div className="todo-item">
+            <div className={`priority-circle ${todo.priority}`}></div>
+            <span key={todo.id}>{todo.title}</span>
+          </div>
+        ))}
     </>
   );
 };
 const PostsTab = () => {
-  return <div>Posts</div>;
+  return <div className="post-container">Posts</div>;
 };
