@@ -1,3 +1,7 @@
+/* 공통 부분 css 
+상태 버튼은 추가에서의 설정한 중요도 버튼과 동일한 스타일 적용용
+*/
+
 form {
   display: flex;
   flex-direction: column;
@@ -21,28 +25,31 @@ input[type='text'] {
   align-items: center;
   gap: 10px;
   width: 100%;
-  margin-bottom: 70px;
+  margin-bottom: 20px;
 }
 
-.priority-container label {
+.priority-container label,
+.status-container label {
   flex-shrink: 0;
   width: 60px;
-  font-size: 14px;
+  font-size: 15px;
 }
 
-.priority-options {
+.priority-options,
+.status-options {
   display: flex;
   gap: 8px;
   flex: 1;
 }
 
-.priority-btn {
+.priority-btn,
+.status-btn {
   flex: 1;
   border: 1px solid #ccc;
   border-radius: 20px;
   padding: 6px 12px;
   background-color: white;
-  font-size: 14px;
+  font-size: 15px;
   cursor: default;
 }
 
@@ -56,7 +63,8 @@ input[type='text'] {
   color: green;
 }
 
-.priority-btn:hover {
+.priority-btn:hover,
+.status-btn:hover {
   background-color: #d9d9d9;
   transition: background-color 0.3s ease;
 }
@@ -75,4 +83,27 @@ input[type='text'] {
 .submit-btn:hover {
   background-color: #7a7cda;
   transition: background-color 0.3s ease;
+}
+
+/* todoEdit css */
+.status-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.empty-status-container {
+  margin-bottom: 80px; 
+  /* 상태가 있을 시 50px 주고 상태 버튼의 사이즈가 총 30px이므로 
+  80px로 설정해서 버튼의 위치 같게 설정. */
+}
+
+.status-active {
+  color: #AAAAAA;
+}
+
+.status-finished {
+  color: #C28E8F;
 }
