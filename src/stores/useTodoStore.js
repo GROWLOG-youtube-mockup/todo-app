@@ -30,6 +30,10 @@ export const useTodoStore = create(
           : todo
       );
       set({ todos: updatedTodos });
+    },
+
+    removeTodo: (id) => {
+      set({ todos: get().todos.filter((todo) => todo.id !== id) });
     }
   }))
 );
