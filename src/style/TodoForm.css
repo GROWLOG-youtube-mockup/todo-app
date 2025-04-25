@@ -95,15 +95,22 @@ input[type='text'] {
 }
 
 .empty-status-container {
-  margin-bottom: 80px; 
+  margin-bottom: 80px;
   /* 상태가 있을 시 50px 주고 상태 버튼의 사이즈가 총 30px이므로 
   80px로 설정해서 버튼의 위치 같게 설정. */
 }
 
 .status-active {
-  color: #AAAAAA;
+  color: #aaaaaa;
 }
 
 .status-finished {
-  color: #C28E8F;
+  color: #c28e8f;
+}
+
+.priority-btn.active,
+.status-btn.active {
+  border: 1px solid #000000;
+  background-color: #D9D9D9;
+  
 }

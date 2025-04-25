@@ -25,8 +25,6 @@ function TodoAdd() {
       <form>
         <input type="text" id="title" placeholder="제목" />
         <input type="text" id="description" placeholder="설명" />
-
-
         <div className="priority-container">
           <label>중요도</label>
           <div className="priority-options">
@@ -41,10 +39,8 @@ function TodoAdd() {
             </button>
           </div>
         </div>
-
-        <div className="empty-status-container"></div> {/* 추가에는 상태 버튼이 없음. 스타일을 위해 추가가 */}
-
-
+        <div className="empty-status-container"></div>{' '}
+        {/* 추가에는 상태 버튼이 없음. 스타일을 위해 추가 */}
         <button type="submit" className="submit-btn">
           추가
         </button>
