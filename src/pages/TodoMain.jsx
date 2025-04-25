@@ -1,9 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import Header from '../components/Header';
+
 function TodoMain() {
   return (
     <div className="page-container">
+      <Header
+        title="TODO APP"
+        centerTitle={true}
+        showBackArrow={false}
+        showProfile={true}
+        showShare={true}
+      />
+
       {/*작업시 삭제후 진행해주세요*/}
       <h1>할 일 목록 메인</h1>
       <div className="button-container">

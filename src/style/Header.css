@@ -3,30 +3,52 @@
 .header {
   width: 100%;
   height: var(--header-height);
-  min-height: var(--header-height); /* 최소 높이 추가 */
+  min-height: var(--header-height);
   background-color: var(--color-primary);
   padding-bottom: var(--spacing-md2);
   display: flex;
-  align-items: flex-end; /* 헤더 내용을 아래쪽으로 정렬 */
+  align-items: flex-end;
   box-sizing: border-box;
 }
 
 .header-container {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0 var(--spacing-md);
   width: 100%;
+  position: relative;
+  font-family: var(--font-family);
 }
 
-.arrow-left {
+.left-group {
   display: flex;
-  padding-left: var(--spacing-sm);
-  padding-right: var(--spacing-md);
+  align-items: center;
+  gap: var(--spacing-sm);
 }
 
 .header-text {
   font-size: var(--font-header);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-white);
-  text-decoration: none;
+}
+
+.center-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.right-icons {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.arrow-left,
+.icon {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: var(--color-text-white);
 }
