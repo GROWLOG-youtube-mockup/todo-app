@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import Header from '../components/Header.jsx';
-import useTabStore from '../store/useTabStore.js';
+import useTabStore from '../stores/useTabStore.js';
 
 function TodoProfile() {
   const { currentTab } = useTabStore();
