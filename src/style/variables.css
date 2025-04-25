@@ -7,7 +7,7 @@
   --color-primary: #9395d3; /* 헤더 색상 */
   --color-secondary: #d6d7ef; /* 메인페이지 배경색 */
   --color-complted-background: #e6e6f2; /* 선택된 요소 프로필, 메인 */
-  --color-background: #f5f5f5;
+  --color-background: #fdfdfd;
 
   --color-text: #000000;
   --color-text-white: #ffffff; /* 헤더 텍스트 */
@@ -15,6 +15,8 @@
   --color-text-highlight-dark: #5a4d9a; /* 선택된 요소 프로필, 메인 */
   --color-text-gray: #8b8787; /* 비어있는 내용 추가/수정 페이지 */
   --color-text-light-gray: #aaaaaa; /* 메인상단 진척도 */
+
+  --color-border-gray: #d9d9d9;
 
   --color-priority-1: #ff4d4d;
   --color-priority-2: #ffd700;
@@ -25,6 +27,7 @@
   --spacing-md: 16px; /* 추가/수정버튼 */
   --spacing-md2: 20px; /* 헤더 하단 패딩 */
   --spacing-lg: 24px;
+  --spacing-xl: 32px;
 
   --radious-xs: 4px;
   --radious-sm: 8px;
@@ -41,6 +44,7 @@
   --container-height: 810px; /* 모바일 기기 기준 높이 */
   --todo-width: 398px; /* todo요소 너비 */
   --todo-height: 80px; /* todo요소 높이 */
+  --profile-todo-width: 390px; /* 프로필 todo요소 너비 */
   --header-height: 120px; /* 헤더 높이 */
   --button-width: 382px;
   --button-height: 65px; /* 추가/수정 버튼 높이 */

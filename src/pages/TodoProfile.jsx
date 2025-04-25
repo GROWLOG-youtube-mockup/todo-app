@@ -2,6 +2,7 @@ import React from 'react';
 
 import avatarImg from '../assets/avatar.svg';
 import Header from '../components/Header.jsx';
+import '../style/TodoProfile.css';
 
 function TodoProfile() {
   return (
@@ -10,9 +11,10 @@ function TodoProfile() {
       <div className="profile-container">
         <div className="avatar-container">
           <img src={avatarImg} alt="Profile Avatar" className="profile-avatar" />
+          <h2 className="profile-name">GrowLog</h2>
         </div>
-        <h2 className="profile-name">GrowLog</h2>
-
+      </div>
+      <div className="tab-contianer">
         <div className="profile-tabs">
           <button className="tab-button active">할일 기록</button>
           <button className="tab-button">게시물</button>

@@ -1,0 +1,49 @@
+@import './variables.css';
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-avatar {
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-sm);
+}
+
+.profile-name {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: var(--spacing-xs);
+  margin-bottom: var(--spacing-lg);
+}
+
+.profile-tabs {
+  display: flex;
+  width: var(--profile-todo-width);
+  border: 1px solid var(--color-border-gray);
+  margin-bottom: 20px;
+}
+
+.tab-button {
+  flex: 1;
+  background-color: var(--color-text-white);
+  color: var(--color-text-gray);
+  border: none;
+  padding: 12px 0;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.tab-button.active {
+  background-color: #e6e6fa;
+  color: var(--color-text-highlight-dark);
+  font-weight: bold;
+}
+
+.tab-content {
+  width: 100%;
+  min-height: 200px;
+}
