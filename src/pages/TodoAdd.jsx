@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
 import Header from '../components/Header.jsx';
-import { useTodoStore } from '../stores/useTodoStore.js';
+// import { useTodoStore } from '../stores/useTodoStore.js';
 import '../style/TodoForm.css';
 
 // 중요도 옵션 정의
 const PRIORITY_OPTIONS = [
   { label: '높음', colorClass: 'red-dot' },
   { label: '중간', colorClass: 'yellow-dot' },
-  { label: '낮음', colorClass: 'green-dot' },
+  { label: '낮음', colorClass: 'green-dot' }
 ];
 
 function TodoAdd() {
@@ -26,7 +26,7 @@ function TodoAdd() {
   };
   */
 
-    // TODO: 이후 zustand 상태로 교체 예정
+  // TODO: 이후 zustand 상태로 교체 예정
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [selectedPriority, setSelectedPriority] = useState('');
@@ -37,7 +37,7 @@ function TodoAdd() {
     console.log('할 일 추가 요청:', {
       title,
       description,
-      priority: selectedPriority || '중간',
+      priority: selectedPriority || '중간'
     });
 
     // 입력값 초기화
@@ -50,16 +50,8 @@ function TodoAdd() {
     <div className="page-container">
       <Header title="TODO 추가" />
       <form onSubmit={handleSubmit}>
-        <input 
-          type="text" 
-          id="title" 
-          placeholder="제목" 
-        />
-        <input 
-          type="text" 
-          id="description" 
-          placeholder="설명" 
-        />
+        <input type="text" id="title" placeholder="제목" />
+        <input type="text" id="description" placeholder="설명" />
 
         <div className="priority-container">
           <label>중요도</label>
@@ -77,15 +69,11 @@ function TodoAdd() {
           </div>
         </div>
 
-        <div className="empty-status-container"/>
+        <div className="empty-status-container" />
 
-        <button 
-          type="submit" 
-          className="submit-btn"
-        >
+        <button type="submit" className="submit-btn">
           추가
         </button>
-
       </form>
     </div>
   );

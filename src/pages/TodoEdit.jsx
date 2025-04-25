@@ -1,4 +1,4 @@
-import React , { useState } from 'react';
+import React, { useState } from 'react';
 
 import Header from '../components/Header.jsx';
 import '../style/TodoForm.css';
@@ -6,13 +6,12 @@ import '../style/TodoForm.css';
 const PRIORITY_OPTIONS = [
   { label: '높음', colorClass: 'red-dot' },
   { label: '중간', colorClass: 'yellow-dot' },
-  { label: '낮음', colorClass: 'green-dot' },
+  { label: '낮음', colorClass: 'green-dot' }
 ];
 
 const STATUS_OPTIONS = ['진행 중', '완료됨'];
 
 function TodoEdit() {
-
   // TODO: 이후 localStorage에서 값 불러와서 상태 초기화
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -26,7 +25,7 @@ function TodoEdit() {
       title,
       description,
       priority: selectedPriority,
-      status: selectedStatus,
+      status: selectedStatus
     });
   };
 
@@ -51,7 +50,7 @@ function TodoEdit() {
         <div className="priority-container">
           <label>중요도</label>
           <div className="priority-options">
-          {PRIORITY_OPTIONS.map(({ label, colorClass }) => (
+            {PRIORITY_OPTIONS.map(({ label, colorClass }) => (
               <button
                 key={label}
                 type="button"
@@ -68,22 +67,19 @@ function TodoEdit() {
           <label>상태</label>
           <div className="status-options">
             {STATUS_OPTIONS.map((status) => (
-                <button
-                  key={status}
-                  type="button"
-                  className={`status-btn ${status === '진행 중' ? 'status-active' : 'status-finished'} ${selectedStatus === status ? 'active' : ''}`}
-                  onClick={() => setSelectedStatus(status)}
-                >
-                  {status}
-                </button>
-              ))}
+              <button
+                key={status}
+                type="button"
+                className={`status-btn ${status === '진행 중' ? 'status-active' : 'status-finished'} ${selectedStatus === status ? 'active' : ''}`}
+                onClick={() => setSelectedStatus(status)}
+              >
+                {status}
+              </button>
+            ))}
           </div>
         </div>
 
-        <button 
-          type="submit" 
-          className="submit-btn"
-        >
+        <button type="submit" className="submit-btn">
           수정
         </button>
       </form>
