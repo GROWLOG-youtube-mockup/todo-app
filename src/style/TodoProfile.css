@@ -45,6 +45,7 @@
 .tab-content {
   width: 100%;
   min-height: 200px;
+  width: var(--profile-todo-width);
 }
 
 .todo-item {
@@ -105,4 +106,26 @@ span.todo-count {
   font-size: var(--font-body-small);
   color: var(--color-text-light-gray);
   margin-left: var(--spacing-sm);
+}
+
+/* 아코디언 헤더 스타일 */
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.accordion-icon {
+  font-size: var(--font-header);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 0 !important;
+  padding: 0 var(--spacing-md) !important;
+}
+
+/* '-' 아이콘 */
+.minus-icon {
+  font-size: var(--button-height-sm);
 }

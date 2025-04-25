@@ -87,16 +87,11 @@ const TodoListContainer = ({ isCompleted }) => {
 
   return (
     <>
-      <div
-        onClick={toggleAcordion}
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignContent: 'center'
-        }}
-      >
+      <div onClick={toggleAcordion} className="accordion-header">
         <span className="todo-count">{isCompleted == 'true' ? '완료된 할 일' : '해야 할 일'}</span>
-        <span className="todo-count">{isOpen ? '-' : '+'}</span>
+        <span className={`todo-count accordion-icon ${isOpen ? 'minus-icon' : 'plus-icon'}`}>
+          {isOpen ? '-' : '+'}
+        </span>
       </div>
 
       {isOpen &&
