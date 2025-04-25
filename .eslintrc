@@ -6,19 +6,37 @@
     "jest": true
   },
   "ignorePatterns": ["node_modules/", ".pnp.cjs", ".pnp.loader.cjs", "public/"],
-  "extends": ["eslint:recommended", "airbnb-base", "plugin:prettier/recommended"],
-  "plugins": ["simple-import-sort", "unused-imports", "prettier"],
+  "extends": [
+    "eslint:recommended",
+    "airbnb-base",
+    "plugin:react/recommended", // React 규칙 추가
+    "plugin:prettier/recommended"
+  ],
+  "plugins": [
+    "react", // React 플러그인 추가
+    "simple-import-sort",
+    "unused-imports",
+    "prettier"
+  ],
   "settings": {
+    "react": {
+      // React 설정 추가
+      "version": "detect"
+    },
     "import/resolver": {
       "alias": {
         "map": [["@", "./src"]],
-        "extensions": [".js", ".json"]
+        "extensions": [".js", ".jsx", ".json"] // jsx 확장자 추가
       }
     }
   },
   "parserOptions": {
     "ecmaVersion": 2022,
-    "sourceType": "module"
+    "sourceType": "module",
+    "ecmaFeatures": {
+      // JSX 지원 추가
+      "jsx": true
+    }
   },
   "rules": {
     "prettier/prettier": ["error", { "endOfLine": "auto" }],
@@ -26,11 +44,13 @@
     "unused-imports/no-unused-imports": "error",
     "import/prefer-default-export": "off",
     "simple-import-sort/imports": "error",
+
     "import/extensions": [
       "error",
       "ignorePackages",
       {
-        "js": "always"
+        "js": "always",
+        "jsx": "always" // jsx 확장자 규칙 추가
       }
     ],
     "import/order": [
