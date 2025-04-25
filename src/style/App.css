@@ -50,7 +50,7 @@ body {
   background-color: var(--color-primary);
   color: white;
   padding: 12px 24px;
-  border-radius: var(--raious-md);
+  border-radius: var(--radious-md);
   text-decoration: none;
   font-weight: bold;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
