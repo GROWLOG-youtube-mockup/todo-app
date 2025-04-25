@@ -12,7 +12,7 @@ function TodoProfile() {
       {/*작업시 삭제후 진행해주세요*/}
       <h1>프로필 페이지</h1>
       <TabNav />
-      <div>
+      <div style={{ width: '80%' }}>
         {currentTab === '할 일' && <TodoTab />}
         {currentTab === '게시글' && <PostsTab />}
       </div>
@@ -43,15 +43,16 @@ const TabNav = () => {
 
 const TodoTab = () => {
   return (
-    <div>
+    <>
       <TodoListContainer isCompleted="false" />
       <TodoListContainer isCompleted="true" />
-    </div>
+    </>
   );
 };
 const TodoListContainer = ({ isCompleted }) => {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isOpen, setIsOpen] = useState(true);
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -74,54 +75,37 @@ const TodoListContainer = ({ isCompleted }) => {
   const filteredTodos = todos.filter((todo) =>
     isCompleted == 'true' ? todo.isComplete : !todo.isComplete
   );
+  const toggleAcordion = () => {
+    setIsOpen((prev) => !prev);
+  };
+
   return (
-    <div>
-      <h3>{isCompleted == 'true' ? '완료된 할 일' : '해야 할 일'}</h3>
-      <ul>
-        {filteredTodos.map((todo) => (
-          <li key={todo.id}>{todo.title}</li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <div
+        className="accordion-header"
+        onClick={toggleAcordion}
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignContent: 'center'
+        }}
+      >
+        <h3>{isCompleted == 'true' ? '완료된 할 일' : '해야 할 일'}</h3>
+        <p>{isOpen ? '-' : '+'}</p>
+      </div>
+
+      <div>
+        {isOpen && (
+          <ul>
+            {filteredTodos.map((todo) => (
+              <li key={todo.id}>{todo.title}</li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </>
   );
 };
-//   const todos = await fetchTodos();
-//   let content;
-
-//   if (!todos || todos.length == 0) content = <p>There is no todos.</p>;
-//   else {
-//     const sortedTodos = todos.reverse();
-
-//     content = (
-//       <>
-//         {console.log(sortedTodos)}
-//         {isCompleted == 'true' ? '완료된 할 일' : '해야 할 일'}
-//         <ul>
-//           {sortedTodos.map((todo) => (
-//             <li key={todo.id}>{todo.title}</li>
-//           ))}
-//         </ul>
-//       </>
-//     );
-//   }
-
-//   return content;
-// };
-// return (
-//   <div>
-//     {isCompleted == 'true' ? '완료된 할 일' : '해야 할 일'}
-//     <ul>
-//       {isCompleted == 'true'
-//         ? todos
-//             .filter((todo) => todo.completed)
-//             .map((todo) => <li key={todo.id}>{todo.title}</li>)
-//         : todos
-//             .filter((todo) => !todo.completed)
-//             .map((todo) => <li key={todo.id}>{todo.title}</li>)}
-//     </ul>
-//   </div>
-// );
-// };
 const PostsTab = () => {
   return <div>Posts</div>;
 };
