@@ -23,6 +23,7 @@
   display: flex;
   width: var(--profile-todo-width);
   border: 1px solid var(--color-border-gray);
+  margin-bottom: var(--spacing-sm);
 }
 
 .tab-button {
@@ -113,6 +114,15 @@ span.todo-count {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  padding-bottom: var(--spacing-xs);
+  margin-bottom: var(--spacing-sm);
+  /* 기본적으로 border 없음 */
+  border-bottom: none;
+}
+
+/* 아코디언이 접혀있을 때(plus-icon일 때) border-bottom 표시 */
+.accordion-header:has(.plus-icon) {
+  border-bottom: 1px solid var(--color-secondary);
 }
 
 .accordion-icon {
@@ -121,8 +131,10 @@ span.todo-count {
   align-items: center;
   justify-content: center;
   text-align: center;
+  width: var(--font-body-bold);
   margin: 0 !important;
   padding: 0 var(--spacing-md) !important;
+  align-self: center;
 }
 
 /* '-' 아이콘 */
