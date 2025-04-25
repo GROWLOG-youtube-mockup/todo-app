@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Header from '../components/Header.jsx';
+import { useTodoStore } from '../stores/useTodoStore.js';
 
 function TodoAdd() {
+  /*
+  // useTodoStore 사용 예시 코드
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const addTodo = useTodoStore((state) => state.addTodo);
+
+  const handleAdd = () => {
+    if (!title.trim()) return;
+    addTodo({ title, description, priority: 'medium' });
+    setTitle('');
+    setDescription('');
+  };
+  */
+
   return (
     <div className="page-container">
       <Header title="TODO 추가" />
