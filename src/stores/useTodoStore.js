@@ -34,6 +34,10 @@ export const useTodoStore = create(
 
     removeTodo: (id) => {
       set({ todos: get().todos.filter((todo) => todo.id !== id) });
+    },
+
+    resetTodos: () => {
+      set({ todos: [] });
     }
   }))
 );
