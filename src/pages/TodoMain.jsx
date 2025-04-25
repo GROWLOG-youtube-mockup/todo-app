@@ -1,11 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../components/Header.jsx';
+import { useTodoStore } from '../stores/useTodoStore.jsx';
 
-import Header from '../components/Header';
 
 function TodoMain() {
+  // 로컬 상태
+  const [activeFilter, setActiveFilter] = useState('전체');
+  const [sortOption, setSortOption] = useState('날짜순');
+  const [showDropDown, setShowDropDown] = useState(false);
+
+  // todo, 액션 가져옴
+  const todos = useTodoStore((state) => state.todos);
+  const addTodo = useTodoStore((state) => state.addTodo);
+  const updateTodo = useTodoStore((state) => state.updateTodo);
+  const removeTodo = useTodoStore((state) => state.removeTodo);
+
+  // 필터 옵션
+  const filters = ['전체', '진행 중', '완료됨'];
+
+  // 정렬 옵션
+  const sortOptions = ['날짜순', '중요도순'];
+
+  // 필터, 정렬 기능 구현 자리
+
+  function toggleDropDown() {
+    setShowDropDown(!showDropDown);
+  }
+
   return (
-    <div className="page-container">
+    <div className="todo-container">
       <Header
         title="TODO APP"
         centerTitle={true}
@@ -13,26 +37,11 @@ function TodoMain() {
         showProfile={true}
         showShare={true}
       />
-
-      {/*작업시 삭제후 진행해주세요*/}
-      <h1>할 일 목록 메인</h1>
-      <div className="button-container">
-        <Link to="/profile" className="nav-button">
-          프로필 이동 예시
-        </Link>
+      <div className="filter-sort-container">
+        <div className="filter-buttons">
+          
+        </div>
       </div>
-
-      <div className="button-container">
-        <Link to="/add" className="nav-button">
-          추가하기 예시
-        </Link>
-      </div>
-      <div className="button-container">
-        <Link to="/edit" className="nav-button">
-          수정하기 예시
-        </Link>
-      </div>
-      {/*작업시 삭제후 진행해주세요*/}
     </div>
   );
 }
