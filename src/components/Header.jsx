@@ -18,9 +18,9 @@ function Header({
       <div className="header-container">
         <div className="left-group">
           {showProfile && (
-            <div className="icon profile-icon">
+            <Link to="/profile" className="icon profile-icon">
               <img src={ProfileIcon} alt="Profile" className="icon-img" />
-            </div>
+            </Link>
           )}
           {showBackArrow && (
             <Link to="/" className="arrow-left">
