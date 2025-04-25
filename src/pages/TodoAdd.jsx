@@ -4,6 +4,13 @@ import Header from '../components/Header.jsx';
 import { useTodoStore } from '../stores/useTodoStore.js';
 import '../style/TodoForm.css';
 
+// 중요도 옵션 정의
+const PRIORITY_OPTIONS = [
+  { label: '높음', colorClass: 'red-dot' },
+  { label: '중간', colorClass: 'yellow-dot' },
+  { label: '낮음', colorClass: 'green-dot' },
+];
+
 function TodoAdd() {
   /*
   // useTodoStore 사용 예시 코드
@@ -19,31 +26,66 @@ function TodoAdd() {
   };
   */
 
+    // TODO: 이후 zustand 상태로 교체 예정
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [selectedPriority, setSelectedPriority] = useState('');
+
+  // TODO: 이후 zustand addTodo 등 실제 로직으로 교체 예정
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('할 일 추가 요청:', {
+      title,
+      description,
+      priority: selectedPriority || '중간',
+    });
+
+    // 입력값 초기화
+    setTitle('');
+    setDescription('');
+    setSelectedPriority('');
+  };
+
   return (
     <div className="page-container">
       <Header title="TODO 추가" />
-      <form>
-        <input type="text" id="title" placeholder="제목" />
-        <input type="text" id="description" placeholder="설명" />
+      <form onSubmit={handleSubmit}>
+        <input 
+          type="text" 
+          id="title" 
+          placeholder="제목" 
+        />
+        <input 
+          type="text" 
+          id="description" 
+          placeholder="설명" 
+        />
+
         <div className="priority-container">
           <label>중요도</label>
           <div className="priority-options">
-            <button type="button" className="priority-btn">
-              <span className="priority-dot red-dot">●</span> 높음
-            </button>
-            <button type="button" className="priority-btn">
-              <span className="priority-dot yellow-dot">●</span> 중간
-            </button>
-            <button type="button" className="priority-btn">
-              <span className="priority-dot green-dot">●</span> 낮음
-            </button>
+            {PRIORITY_OPTIONS.map(({ label, colorClass }) => (
+              <button
+                key={label}
+                type="button"
+                className={`priority-btn ${selectedPriority === label ? 'active' : ''}`}
+                onClick={() => setSelectedPriority(label)}
+              >
+                <span className={`priority-dot ${colorClass}`}>●</span> {label}
+              </button>
+            ))}
           </div>
         </div>
-        <div className="empty-status-container"></div>{' '}
-        {/* 추가에는 상태 버튼이 없음. 스타일을 위해 추가 */}
-        <button type="submit" className="submit-btn">
+
+        <div className="empty-status-container"/>
+
+        <button 
+          type="submit" 
+          className="submit-btn"
+        >
           추가
         </button>
+
       </form>
     </div>
   );
