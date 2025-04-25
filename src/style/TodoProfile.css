@@ -45,6 +45,7 @@
 .tab-content {
   width: 100%;
   min-height: 200px;
+  width: var(--profile-todo-width);
 }
 
 .todo-item {
@@ -105,4 +106,44 @@ span.todo-count {
   font-size: var(--font-body-small);
   color: var(--color-text-light-gray);
   margin-left: var(--spacing-sm);
+}
+
+/* 아코디언 헤더 스타일 */
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end; /* 원래 스타일로 복원 */
+  padding-bottom: var(--spacing-xs);
+  margin-top: var(--spacing-sm);
+  border-bottom: none;
+  min-height: 40px; /* 고정 높이 대신 최소 높이 설정 */
+  box-sizing: border-box;
+}
+
+/* 아코디언이 접혀있을 때(plus-icon일 때) border-bottom 표시 */
+.accordion-header:has(.plus-icon) {
+  border-bottom: 1px solid var(--color-secondary);
+}
+
+.accordion-icon {
+  font-size: var(--font-header);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: var(--font-body-bold);
+  margin: 0 !important;
+  padding: 0 var(--spacing-md) !important;
+  align-self: center;
+}
+
+/* '-' 아이콘과 '+' 아이콘의 스타일 통일 */
+.minus-icon,
+.plus-icon {
+  line-height: 0;
+}
+
+/* 필요한 경우 특별히 크기를 조정하되 위치는 중앙 유지 */
+.minus-icon {
+  font-size: 28px;
 }
