@@ -1,6 +1,6 @@
 import React from 'react';
 
-function TodoItem({ title, description, priority }) {
+function TodoItem({ title, description, priority, isComplete }) {
   return (
     <li>
       <div>
@@ -13,7 +13,7 @@ function TodoItem({ title, description, priority }) {
       <div>
         <button>EDIT</button>
         <button>DELETE</button>
-        <button>COMPLETE</button>
+        <button disabled={isComplete}>COMPLETE</button>
       </div>
     </li>
   );
