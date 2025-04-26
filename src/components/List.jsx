@@ -4,11 +4,11 @@ import TodoItem from './TodoItem.jsx';
 
 function List({ todos }) {
   return (
-    <div>
+    <ul>
       {todos.map(({ id, title, description, priority }) => (
         <TodoItem key={id} todo={title} description={description} priority={priority} />
       ))}
-    </div>
+    </ul>
   );
 }
 

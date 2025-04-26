@@ -2,7 +2,7 @@ import React from 'react';
 
 function TodoItem({ title, description, priority }) {
   return (
-    <>
+    <li>
       <div>
         <div>
           <div>{priority}</div>
@@ -15,7 +15,7 @@ function TodoItem({ title, description, priority }) {
         <button>DELETE</button>
         <button>COMPLETE</button>
       </div>
-    </>
+    </li>
   );
 }
 
