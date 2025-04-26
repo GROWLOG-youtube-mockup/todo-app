@@ -102,30 +102,29 @@ function TodoEdit() {
   return (
     <div className="page-container">
       <Header title="TODO 편집" />
-
       <form onSubmit={handleSubmit}>
         <input
           type="text"
+          placeholder="제목"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="제목"
         />
         <input
           type="text"
+          placeholder="설명"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          placeholder="설명"
         />
 
         <div className="priority-container">
           <label>중요도</label>
           <div className="priority-options">
-            {PRIORITY_OPTIONS.map(({ label, colorClass }) => (
+            {PRIORITY_OPTIONS.map(({ label, value, colorClass }) => (
               <button
-                key={label}
+                key={value}
                 type="button"
-                className={`priority-btn ${selectedPriority === label ? 'active' : ''}`}
-                onClick={() => setSelectedPriority(label)}
+                className={`priority-btn ${selectedPriority === value ? 'active' : ''}`}
+                onClick={() => setSelectedPriority(value)}
               >
                 <span className={`priority-dot ${colorClass}`}>●</span> {label}
               </button>
@@ -136,14 +135,16 @@ function TodoEdit() {
         <div className="status-container">
           <label>상태</label>
           <div className="status-options">
-            {STATUS_OPTIONS.map((status) => (
+            {STATUS_OPTIONS.map(({ label, value }) => (
               <button
-                key={status}
+                key={label}
                 type="button"
-                className={`status-btn ${status === '진행 중' ? 'status-active' : 'status-finished'} ${selectedStatus === status ? 'active' : ''}`}
-                onClick={() => setSelectedStatus(status)}
+                className={`status-btn ${
+                  value ? 'status-finished' : 'status-active'
+                } ${selectedStatus === value ? 'active' : ''}`}
+                onClick={() => setSelectedStatus(value)}
               >
-                {status}
+                {label}
               </button>
             ))}
           </div>
