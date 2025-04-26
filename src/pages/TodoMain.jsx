@@ -26,7 +26,7 @@ function TodoMain() {
             id: 1,
             title: 'TODO 1',
             description: 'TODO 메모',
-            saveAt: '2025-04-24T09:30:00Z',
+            saveAt: '2025-04-22T09:30:00Z',
             isComplete: false,
             priority: 'high'
           },
@@ -52,14 +52,17 @@ function TodoMain() {
   const filters = ['전체', '진행 중', '완료됨'];
   const sortOptions = ['날짜순', '중요도순'];
 
-  function toggleDropDown() {
+  const toggleDropDown = () => {
     setShowDropDown(!showDropDown);
-  }
+  };
 
-  function handleSortChange(option) {
-    setSortOption(option);
+  const handleSortChange = (option) => {
+    console.log(option, sortOption);
+
+    if (sortOption !== option) setSortOption(option);
+
     setShowDropDown(false);
-  }
+  };
 
   const getPriorityColorClass = (priority) => {
     switch (priority) {
@@ -134,9 +137,15 @@ function TodoMain() {
     }
 
     if (sortOption === '중요도순') {
-      filterTodoList.sort((a, b) => b.priority - a.priority);
+      const priorityOrder = {
+        high: 1,
+        medium: 2,
+        low: 3
+      };
+
+      filterTodoList.sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]);
     } else {
-      filterTodoList.sort((a, b) => b.saveAt - a.saveAt);
+      filterTodoList.sort((a, b) => new Date(b.saveAt).getTime() - new Date(a.saveAt).getTime());
     }
 
     setFilterTodos(filterTodoList);
@@ -167,6 +176,7 @@ function TodoMain() {
             </button>
           ))}
         </div>
+
         <div className="sort-dropdown">
           <button className="sort-button" onClick={toggleDropDown}>
             {sortOption} ▼
