@@ -11,12 +11,11 @@ import DeleteIcon from '../assets/Trash_icon.svg';
 function TodoMain() {
   const navigate = useNavigate();
 
-  // 로컬 상태
   const [activeFilter, setActiveFilter] = useState('전체');
   const [sortOption, setSortOption] = useState('날짜순');
   const [showDropDown, setShowDropDown] = useState(false);
 
-  // 임시 todo 데이터
+  // 연동 전 임시 todo 데이터(저장 시간 X)
   const todoList = [
     {
       id: 1,
@@ -134,7 +133,7 @@ function TodoMain() {
       {/* ToDo 목록 렌더링 */}
       <div className="todo-list">
         {todoList.map((todo) => (
-          <div key={todo.id} className="todo-item">
+          <div key={todo.id} className={`todo-item ${todo.isComplete ? 'completed-item' : ''}`}>
             <div className="todo-content">
               <div className={`color-dot ${getPriorityColorClass(todo.priority)}`} />
               <div className="todo-text">
@@ -161,7 +160,7 @@ function TodoMain() {
               )}
               <img
                 src={CheckIcon}
-                className={`check-icon ${todo.isComplete ? 'check-complete' : 'check-incomplete'}`}
+                className={`action-icon ${todo.isComplete ? 'check-complete' : 'check-incomplete'}`}
                 onClick={() => handleToggleComplete(todo.id)}
                 alt="완료 체크"
               />
