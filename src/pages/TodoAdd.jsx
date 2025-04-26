@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 
 import Header from '../components/Header.jsx';
-// import { useTodoStore } from '../stores/useTodoStore.js';
 import '../style/TodoForm.css';
 
-// 중요도 옵션 정의
 const PRIORITY_OPTIONS = [
   { label: '높음', colorClass: 'red-dot' },
   { label: '중간', colorClass: 'yellow-dot' },
@@ -12,20 +10,6 @@ const PRIORITY_OPTIONS = [
 ];
 
 function TodoAdd() {
-  /*
-  // useTodoStore 사용 예시 코드
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const addTodo = useTodoStore((state) => state.addTodo);
-
-  const handleAdd = () => {
-    if (!title.trim()) return;
-    addTodo({ title, description, priority: 'medium' });
-    setTitle('');
-    setDescription('');
-  };
-  */
-
   // TODO: 이후 zustand 상태로 교체 예정
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
