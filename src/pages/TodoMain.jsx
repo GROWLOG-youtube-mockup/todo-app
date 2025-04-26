@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import '../style/TodoMain.css';
@@ -18,8 +18,8 @@ function TodoMain() {
   const todos = useTodoStore((state) => state.todos);
 
   // 연동 전 임시 todo 데이터(저장 시간 X)
-  const todoList =
-    todos.length > 0
+  const todoList = useMemo(() => {
+    return todos.length > 0
       ? todos
       : [
           {
@@ -47,23 +47,7 @@ function TodoMain() {
             priority: 'medium'
           }
         ];
-
-  useEffect(() => {
-    let filterTodoList = [];
-
-    if (activeFilter !== '전체') {
-      const isComplete = activeFilter === '완료됨';
-      filterTodoList = todoList.filter((todo) => todo.isComplete === isComplete);
-    }
-
-    if (sortOption === '중요도순') {
-      filterTodoList.sort((a, b) => b.priority - a.priority);
-    } else {
-      filterTodoList.sort((a, b) => b.saveAt - a.saveAt);
-    }
-
-    setFilterTodos(filterTodoList);
-  }, [filterTodos, todoList, activeFilter, sortOption]);
+  }, [todos]);
 
   const filters = ['전체', '진행 중', '완료됨'];
   const sortOptions = ['날짜순', '중요도순'];
@@ -140,6 +124,23 @@ function TodoMain() {
 
     URL.revokeObjectURL(url);
   };
+
+  useEffect(() => {
+    let filterTodoList = [];
+
+    if (activeFilter !== '전체') {
+      const isComplete = activeFilter === '완료됨';
+      filterTodoList = todoList.filter((todo) => todo.isComplete === isComplete);
+    }
+
+    if (sortOption === '중요도순') {
+      filterTodoList.sort((a, b) => b.priority - a.priority);
+    } else {
+      filterTodoList.sort((a, b) => b.saveAt - a.saveAt);
+    }
+
+    setFilterTodos(filterTodoList);
+  }, [todoList, activeFilter, sortOption]);
 
   return (
     <div className="todo-container">
