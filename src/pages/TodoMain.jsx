@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import Header from '../components/Header.jsx';
-import { useTodoStore } from '../stores/useTodoStore.js';
 import '../style/TodoMain.css';
 
 function TodoMain() {
@@ -11,19 +10,33 @@ function TodoMain() {
   const [sortOption, setSortOption] = useState('날짜순');
   const [showDropDown, setShowDropDown] = useState(false);
 
-  // todo, 액션 가져옴
-  const todos = useTodoStore((state) => state.todos);
-  const addTodo = useTodoStore((state) => state.addTodo);
-  const updateTodo = useTodoStore((state) => state.updateTodo);
-  const removeTodo = useTodoStore((state) => state.removeTodo);
+  // 임시 todo 데이터
+  const todoList = [
+    {
+      id: 1,
+      title: '스터디 과제 제출',
+      description: 'React로 Todo App 만들기',
+      priority: 'high',
+      isComplete: false
+    },
+    {
+      id: 2,
+      title: '운동 가기',
+      description: '저녁 7시에 헬스장',
+      priority: 'medium',
+      isComplete: false
+    },
+    {
+      id: 3,
+      title: '책 읽기',
+      description: 'Clean Code 2장까지',
+      priority: 'low',
+      isComplete: true
+    }
+  ];
 
-  // 필터 옵션
   const filters = ['전체', '진행 중', '완료됨'];
-
-  // 정렬 옵션
   const sortOptions = ['날짜순', '중요도순'];
-
-  // 필터, 정렬 기능 구현 자리
 
   function toggleDropDown() {
     setShowDropDown(!showDropDown);
@@ -34,17 +47,36 @@ function TodoMain() {
     setShowDropDown(false);
   }
 
-  // 중요도에 따른 색 결정
   function getPriorityColorClass(priority) {
     switch (priority) {
       case 'high':
-        return 'priority-3';
+        return 'priority-1';
       case 'medium':
         return 'priority-2';
       case 'low':
       default:
-        return 'priority-1';
+        return 'priority-3';
     }
+  }
+
+  function handleEdit(id) {
+    navigate(`/edit/${id}`);
+  }
+
+  function handleDelete(id) {
+    setTodoList((prev) => prev.filter((todo) => todo.id !== id));
+  }
+
+  function handleAdd() {
+    navigate('/add');
+  }
+
+  function handleToggleComplete(id) {
+    setTodoList((prev) => {
+      return prev.map((todo) =>
+        todo.id === id ? { ...todo, isComplete: !todo.isComplete } : todo
+      );
+    });
   }
 
   return (
@@ -58,6 +90,7 @@ function TodoMain() {
           showShare={true}
         />
       </div>
+
       <div className="filter-sort-container">
         <div className="filter-buttons">
           {filters.map((filter) => (
@@ -90,6 +123,33 @@ function TodoMain() {
           )}
         </div>
       </div>
+
+      {/* ToDo 목록 렌더링 */}
+      <div className="todo-list">
+        {todoList.map((todo) => (
+          <div key={todo.id} className="todo-item">
+            <div className="todo-content">
+              <div className={`color-dot ${getPriorityColorClass(todo.priority)}`} />
+              <div className="todo-text">
+                <p className="todo-title">{todo.title}</p>
+                <p className="todo-description">{todo.description}</p>
+              </div>
+            </div>
+            <div className="todo-actions">
+              <button className="edit-button" onClick={() => handleEdit(todo.id)}>
+                ✏️
+              </button>
+              <button className="delete-button" onClick={() => handleDelete(todo.id)}>
+                🗑️
+              </button>
+              <button className="complete-button" onClick={() => handleToggleComplete(todo.id)}>
+                {todo.isComplete ? '✔️' : '⬜'}
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
       <button className="add-todo-button">+</button>
     </div>
   );
