@@ -140,12 +140,22 @@ function TodoMain() {
               </div>
             </div>
             <div className="todo-actions">
-              <img src={EditIcon} className="edit-button" onClick={() => handleEdit(todo.id)} />
-              <img
-                src={DeleteIcon}
-                className="delete-button"
-                onClick={() => handleDelete(todo.id)}
-              />
+              {!todo.isComplete && (
+                <>
+                  <img
+                    src={EditIcon}
+                    className="action-icon"
+                    onClick={() => handleEdit(todo.id)}
+                    alt="수정"
+                  />
+                  <img
+                    src={DeleteIcon}
+                    className="action-icon"
+                    onClick={() => handleDelete(todo.id)}
+                    alt="삭제"
+                  />
+                </>
+              )}
               <img
                 src={CheckIcon}
                 className={`check-icon ${todo.isComplete ? 'check-complete' : 'check-incomplete'}`}

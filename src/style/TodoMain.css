@@ -161,12 +161,18 @@
 
 .todo-actions {
   display: flex;
-  gap: var(--spacing-xs);
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.action-icon {
+  cursor: pointer;
+  display: block;
+  object-fit: contain;
 }
 
 .edit-button,
-.delete-button,
-.complete-button {
+.delete-button {
   background: none;
   border: none;
   cursor: pointer;
@@ -178,23 +184,26 @@
 
 .edit-button {
   color: var(--color-primary);
+  width: 23px;
+  height: 23px;
 }
 
 .delete-button {
   color: var(--color-priority-1);
 }
 
-.complete-button {
-  color: var(--color-text-light-gray);
+/* 체크 아이콘 스타일링 */
+.check-icon {
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.complete-button.completed {
-  color: var(--color-priority-3);
+.check-incomplete {
+  /* 기본 아이콘 색상 유지 */
 }
 
-.action-icon {
-  width: 20px;
-  height: 20px;
+.check-complete {
+  filter: brightness(0);
 }
 
 /* 추가 버튼 */
