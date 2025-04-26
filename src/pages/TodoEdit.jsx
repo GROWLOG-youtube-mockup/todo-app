@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import Header from '../components/Header.jsx';
+import { useTodoStore } from '../stores/useTodoStore.js';
 import '../style/TodoForm.css';
 
 const API_URL = 'http://localhost:3001';
@@ -22,6 +23,7 @@ const STATUS_OPTIONS = [
 function TodoEdit() {
   const navigate = useNavigate();
   const { id } = useParams(); // URL에서 :id 추출
+  const updateLocalTodo = useTodoStore((s) => s.updateTodo);
 
   // TODO: 이후 localStorage에서 값 불러와서 상태 초기화
   const [title, setTitle] = useState('');
@@ -30,6 +32,7 @@ function TodoEdit() {
   const [selectedStatus, setSelectedStatus] = useState('');
   const [loading, setLoading] = useState(true);
 
+  // 1) 기존 Todo 로드
   useEffect(() => {
     (async () => {
       try {
@@ -49,16 +52,42 @@ function TodoEdit() {
     })();
   }, [id]);
 
-  // TODO: 이후 수정 로직으로 대체
-  const handleSubmit = (e) => {
+  // 2) 수정 제출 기능 구현
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('수정 요청:', {
-      title,
-      description,
-      priority: selectedPriority,
-      status: selectedStatus
-    });
-    navigate('/');
+    try {
+      const payload = {
+        id: Number(id),
+        title,
+        description,
+        priority: selectedPriority,
+        isComplete: selectedStatus,
+        saveAt: new Date().toISOString()
+      };
+
+      const res = await fetch(`${API_URL}/todoList/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const updated = await res.json();
+
+      // zustand 스토어에도 반영
+      updateLocalTodo({
+        id: updated.id,
+        title: updated.title,
+        description: updated.description,
+        priority: updated.priority,
+        isComplete: updated.isComplete
+      });
+
+      // 메인으로 이동
+      navigate('/');
+    } catch (err) {
+      console.error('수정 실패:', err);
+      alert('할 일 수정에 실패했습니다.');
+    }
   };
 
   if (loading) {
