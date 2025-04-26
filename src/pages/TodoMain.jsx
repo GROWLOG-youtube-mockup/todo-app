@@ -3,10 +3,9 @@ import { useNavigate } from 'react-router-dom';
 
 import '../style/TodoMain.css';
 
-import CheckIcon from '../assets/Check_icon.svg';
-import EditIcon from '../assets/Edit_icon.svg';
-import DeleteIcon from '../assets/Trash_icon.svg';
 import Header from '../components/Header.jsx';
+import TodoList from '../components/TodoList.jsx';
+import { useTodoStore } from '../stores/useTodoStore.js';
 
 function TodoMain() {
   const navigate = useNavigate();
@@ -14,6 +13,8 @@ function TodoMain() {
   const [activeFilter, setActiveFilter] = useState('전체');
   const [sortOption, setSortOption] = useState('날짜순');
   const [showDropDown, setShowDropDown] = useState(false);
+
+  const todos = useTodoStore((state) => state.todos);
 
   // 연동 전 임시 todo 데이터(저장 시간 X)
   const todoList = [
@@ -52,7 +53,7 @@ function TodoMain() {
     setShowDropDown(false);
   }
 
-  function getPriorityColorClass(priority) {
+  const getPriorityColorClass = (priority) => {
     switch (priority) {
       case 'high':
         return 'priority-1';
@@ -62,7 +63,7 @@ function TodoMain() {
       default:
         return 'priority-3';
     }
-  }
+  };
 
   function handleEdit(id) {
     navigate(`/edit/${id}`);
@@ -87,6 +88,35 @@ function TodoMain() {
     // });
   }
 
+  const handleShare = () => {
+    /* TODO: 추후 mock data 필요없을 때 수정해야 함 */
+    if (todoList.length < 1 && todos.todos.length < 1) {
+      alert('공유할 할 일이 없습니다.');
+
+      return;
+    }
+
+    const text =
+      todoList.length > 0
+        ? todoList
+        : todos.todos
+            .map(
+              (todo, index) =>
+                `${index + 1}. [${todo.priority}] ${todo.title} - ${todo.description}`
+            )
+            .join('\n');
+
+    const blob = new Blob([text], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'todo-list.txt';
+    a.click();
+
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="todo-container">
       <div className="todo-header">
@@ -96,6 +126,7 @@ function TodoMain() {
           showBackArrow={false}
           showProfile={true}
           showShare={true}
+          handleShare={handleShare}
         />
       </div>
 
@@ -133,43 +164,13 @@ function TodoMain() {
       </div>
 
       {/* ToDo 목록 렌더링 */}
-      <div className="todo-list">
-        {todoList.map((todo) => (
-          <div key={todo.id} className={`todo-item ${todo.isComplete ? 'completed-item' : ''}`}>
-            <div className="todo-content">
-              <div className={`color-dot ${getPriorityColorClass(todo.priority)}`} />
-              <div className="todo-text">
-                <p className="todo-title">{todo.title}</p>
-                <p className="todo-description">{todo.description}</p>
-              </div>
-            </div>
-            <div className="todo-actions">
-              {!todo.isComplete && (
-                <>
-                  <img
-                    src={EditIcon}
-                    className="action-icon"
-                    onClick={() => handleEdit(todo.id)}
-                    alt="수정"
-                  />
-                  <img
-                    src={DeleteIcon}
-                    className="action-icon"
-                    onClick={() => handleDelete(todo.id)}
-                    alt="삭제"
-                  />
-                </>
-              )}
-              <img
-                src={CheckIcon}
-                className={`action-icon ${todo.isComplete ? 'check-complete' : 'check-incomplete'}`}
-                onClick={() => handleToggleComplete(todo.id)}
-                alt="완료 체크"
-              />
-            </div>
-          </div>
-        ))}
-      </div>
+      <TodoList
+        todoList={todoList}
+        getPriorityColorClass={getPriorityColorClass}
+        handleEdit={handleEdit}
+        handleDelete={handleDelete}
+        handleToggleComplete={handleToggleComplete}
+      />
 
       <button className="add-todo-button" onClick={() => handleAdd()}>
         +
