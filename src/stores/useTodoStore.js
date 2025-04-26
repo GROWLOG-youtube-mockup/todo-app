@@ -5,6 +5,7 @@ export const useTodoStore = create(
   persist((set, get) => ({
     todos: [],
 
+    // 기존 addTodo 그대로 유지 (로컬 생성용)
     addTodo: ({ title, description, isComplete, priority }) => {
       const newTodo = {
         id: Date.now(),
@@ -15,6 +16,11 @@ export const useTodoStore = create(
         priority
       };
       set({ todos: [...get().todos, newTodo] });
+    },
+
+    // 원격(server)에서 받아온 todo를 로컬 state에 추가하는 액션
+    addTodoRemote: (todo) => {
+      set({ todos: [...get().todos, todo] });
     },
 
     updateTodo: ({ id, title, description, isComplete, priority }) => {
