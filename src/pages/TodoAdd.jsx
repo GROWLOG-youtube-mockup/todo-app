@@ -4,9 +4,9 @@ import Header from '../components/Header.jsx';
 import '../style/TodoForm.css';
 
 const PRIORITY_OPTIONS = [
-  { label: '높음', colorClass: 'red-dot' },
-  { label: '중간', colorClass: 'yellow-dot' },
-  { label: '낮음', colorClass: 'green-dot' }
+  { label: '높음', value: 'high', colorClass: 'red-dot' },
+  { label: '중간', value: 'medium', colorClass: 'yellow-dot' },
+  { label: '낮음', value: 'low', colorClass: 'green-dot' }
 ];
 
 function TodoAdd() {
