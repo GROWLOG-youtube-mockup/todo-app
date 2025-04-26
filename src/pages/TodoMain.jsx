@@ -126,7 +126,7 @@ function TodoMain() {
   };
 
   useEffect(() => {
-    let filterTodoList = [];
+    let filterTodoList = todoList;
 
     if (activeFilter !== '전체') {
       const isComplete = activeFilter === '완료됨';
