@@ -2,20 +2,32 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import List from '../components/List.jsx';
+import { useFetchTodos } from '../hooks/useFetchTodos.js';
 import { useTodoStore } from '../stores/useTodoStore.js';
 
 function TodoMain() {
-  const todos = useTodoStore((state) => state.todos);
+  const todoList = useTodoStore((state) => state.todos);
+  const { todos, loading, error } = useFetchTodos();
+
+  if (todoList.length < 1 && error) alert('데이터가 존재하지 않습니다.');
 
   const handleShare = () => {
-    if (todos.length === 0) {
+    /* TODO: 추후 mock data 필요없을 때 수정해야 함 */
+    if (todoList.length < 1 && (error || todos.todos.length < 1)) {
       alert('공유할 할 일이 없습니다.');
+
       return;
     }
 
-    const text = todos
-      .map((todo, index) => `${index + 1}. [${todo.priority}] ${todo.title} - ${todo.description}`)
-      .join('\n');
+    const text =
+      todoList.length > 0
+        ? todoList
+        : todos.todos
+            .map(
+              (todo, index) =>
+                `${index + 1}. [${todo.priority}] ${todo.title} - ${todo.description}`
+            )
+            .join('\n');
 
     const blob = new Blob([text], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
@@ -54,7 +66,10 @@ function TodoMain() {
         <button onClick={handleShare}>BUTTON</button>
       </div>
 
-      <List todos={todos} />
+      {
+        /* TODO: 추후 mock data 필요없을 때 수정해야 함 */
+        loading ? <div>로딩 중...</div> : <List todos={todoList > 0 ? todoList : todos.todos} />
+      }
     </div>
   );
 }
