@@ -3,13 +3,18 @@ import React, { useState } from 'react';
 import Header from '../components/Header.jsx';
 import '../style/TodoForm.css';
 
+// 중요도 옵션 (label: 화면, value: 서버/스토어)
 const PRIORITY_OPTIONS = [
-  { label: '높음', colorClass: 'red-dot' },
-  { label: '중간', colorClass: 'yellow-dot' },
-  { label: '낮음', colorClass: 'green-dot' }
+  { label: '높음', value: 'high', colorClass: 'red-dot' },
+  { label: '중간', value: 'medium', colorClass: 'yellow-dot' },
+  { label: '낮음', value: 'low', colorClass: 'green-dot' }
 ];
 
-const STATUS_OPTIONS = ['진행 중', '완료됨'];
+// 상태 옵션 (label: 화면, value: boolean)
+const STATUS_OPTIONS = [
+  { label: '진행 중', value: false },
+  { label: '완료됨', value: true }
+];
 
 function TodoEdit() {
   // TODO: 이후 localStorage에서 값 불러와서 상태 초기화

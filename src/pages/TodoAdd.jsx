@@ -7,6 +7,7 @@ import '../style/TodoForm.css';
 
 const API_URL = 'http://localhost:3001';
 
+// 중요도 옵션 (label: 화면, value: 서버/스토어)
 const PRIORITY_OPTIONS = [
   { label: '높음', value: 'high', colorClass: 'red-dot' },
   { label: '중간', value: 'medium', colorClass: 'yellow-dot' },
