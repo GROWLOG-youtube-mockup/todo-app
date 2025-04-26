@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import Header from '../components/Header.jsx';
-
 import '../style/TodoForm.css';
 
 const API_URL = 'http://localhost:3001';
@@ -22,12 +21,33 @@ const STATUS_OPTIONS = [
 
 function TodoEdit() {
   const navigate = useNavigate();
+  const { id } = useParams(); // URL에서 :id 추출
 
   // TODO: 이후 localStorage에서 값 불러와서 상태 초기화
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [selectedPriority, setSelectedPriority] = useState('');
   const [selectedStatus, setSelectedStatus] = useState('');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await fetch(`${API_URL}/todoList/${id}`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        setTitle(data.title);
+        setDescription(data.description);
+        setSelectedPriority(data.priority ?? '');
+        setSelectedStatus(!!data.isComplete);
+      } catch (err) {
+        console.error('할 일 로드 실패:', err);
+        alert('할 일 정보를 불러올 수 없습니다.');
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [id]);
 
   // TODO: 이후 수정 로직으로 대체
   const handleSubmit = (e) => {
@@ -40,6 +60,15 @@ function TodoEdit() {
     });
     navigate('/');
   };
+
+  if (loading) {
+    return (
+      <div className="page-container">
+        <Header title="TODO 편집" />
+        <p>로딩 중…</p>
+      </div>
+    );
+  }
 
   return (
     <div className="page-container">
