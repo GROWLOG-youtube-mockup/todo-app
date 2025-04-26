@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Header from '../components/Header.jsx';
 import '../style/TodoMain.css';
 
 import CheckIcon from '../assets/Check_icon.svg';
 import EditIcon from '../assets/Edit_icon.svg';
 import DeleteIcon from '../assets/Trash_icon.svg';
+import Header from '../components/Header.jsx';
 
 function TodoMain() {
   const navigate = useNavigate();
@@ -70,7 +70,8 @@ function TodoMain() {
 
   // 정렬 기능 넣기 전이라 임의로 setTodoList라고 정하고 함수 생성해 둔 것(작동 안 됨)
   function handleDelete(id) {
-    setTodoList((prev) => prev.filter((todo) => todo.id !== id));
+    console.log(id);
+    // setTodoList((prev) => prev.filter((todo) => todo.id !== id));
   }
 
   function handleAdd() {
@@ -78,11 +79,12 @@ function TodoMain() {
   }
 
   function handleToggleComplete(id) {
-    setTodoList((prev) => {
-      return prev.map((todo) =>
-        todo.id === id ? { ...todo, isComplete: !todo.isComplete } : todo
-      );
-    });
+    console.log(id);
+    // setTodoList((prev) => {
+    //   return prev.map((todo) =>
+    //     todo.id === id ? { ...todo, isComplete: !todo.isComplete } : todo
+    //   );
+    // });
   }
 
   return (
