@@ -7,6 +7,7 @@ import ShareIcon from '../assets/share.svg';
 import ArrowIcon from '../assets/Turn_BackPage_Button.svg';
 
 function Header({
+  handleShare,
   title = 'Todo App',
   showBackArrow = true,
   showProfile = false,
@@ -32,7 +33,7 @@ function Header({
 
         <div className="right-icons">
           {showShare && (
-            <div className="icon">
+            <div className="icon" onClick={handleShare}>
               <img src={ShareIcon} alt="Share" className="icon-img" />
             </div>
           )}
