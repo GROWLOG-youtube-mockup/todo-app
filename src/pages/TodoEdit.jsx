@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import Header from '../components/Header.jsx';
+
 import '../style/TodoForm.css';
+
+const API_URL = 'http://localhost:3001';
 
 // 중요도 옵션 (label: 화면, value: 서버/스토어)
 const PRIORITY_OPTIONS = [
@@ -17,6 +21,8 @@ const STATUS_OPTIONS = [
 ];
 
 function TodoEdit() {
+  const navigate = useNavigate();
+
   // TODO: 이후 localStorage에서 값 불러와서 상태 초기화
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -32,6 +38,7 @@ function TodoEdit() {
       priority: selectedPriority,
       status: selectedStatus
     });
+    navigate('/');
   };
 
   return (
