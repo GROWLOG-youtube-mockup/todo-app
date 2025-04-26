@@ -20,6 +20,12 @@ function TodoAdd() {
   // TODO: 이후 zustand addTodo 등 실제 로직으로 교체 예정
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // 빈 공백 입력 시 페이지 이동 방지지
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      if (!title.trim()) return;
+
     console.log('할 일 추가 요청:', {
       title,
       description,
