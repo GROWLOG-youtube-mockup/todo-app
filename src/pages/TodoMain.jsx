@@ -9,6 +9,8 @@ import EditIcon from '../assets/Edit_icon.svg';
 import DeleteIcon from '../assets/Trash_icon.svg';
 
 function TodoMain() {
+  const navigate = useNavigate();
+
   // 로컬 상태
   const [activeFilter, setActiveFilter] = useState('전체');
   const [sortOption, setSortOption] = useState('날짜순');
@@ -67,6 +69,7 @@ function TodoMain() {
     navigate(`/edit/${id}`);
   }
 
+  // 정렬 기능 넣기 전이라 임의로 setTodoList라고 정하고 함수 생성해 둔 것(작동 안 됨)
   function handleDelete(id) {
     setTodoList((prev) => prev.filter((todo) => todo.id !== id));
   }
@@ -167,7 +170,9 @@ function TodoMain() {
         ))}
       </div>
 
-      <button className="add-todo-button">+</button>
+      <button className="add-todo-button" onClick={() => handleAdd()}>
+        +
+      </button>
     </div>
   );
 }
