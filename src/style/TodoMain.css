@@ -1,0 +1,242 @@
+@import './variables.css';
+
+.todo-container {
+  display: flex;
+  flex-direction: column;
+  width: var(--container-width);
+  min-height: var(--container-height);
+  background-color: var(--color-secondary);
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+  font-family: var(--font-family);
+}
+
+/* 헤더 */
+.todo-header {
+  position: sticky;
+  top: 0;
+  height: var(--header-height);
+  background-color: var(--color-primary);
+  color: var(--color-text-white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--spacing-md2);
+  z-index: 100;
+}
+
+/* 필터 및 정렬 영역 */
+.filter-sort-container {
+  display: flex;
+  justify-content: space-between;
+  margin: var(--spacing-sm);
+}
+
+.filter-buttons {
+  display: flex;
+  background-color: var(--color-text-white);
+  border-radius: var(--radious-lg);
+  padding: var(--spacing-xs);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filter-button {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radious-lg);
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--color-text-gray);
+  font-size: var(--font-body);
+}
+
+.filter-button.active {
+  background-color: var(--color-primary);
+  color: var(--color-text-white);
+}
+
+.sort-dropdown {
+  position: relative;
+  margin-top: 5px;
+}
+
+.sort-button {
+  background-color: var(--color-text-white);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radious-lg);
+  border: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: var(--font-body);
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  margin-top: var(--spacing-xs);
+  background-color: var(--color-text-white);
+  border-radius: var(--radious-sm);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  width: 100px;
+}
+
+.dropdown-item {
+  padding: var(--spacing-sm) var(--spacing-md);
+  cursor: pointer;
+  font-size: var(--font-body);
+}
+
+.dropdown-item:hover {
+  background-color: var(--color-background);
+  border-radius: var(--radious-sm);
+}
+
+/* ToDo 목록 */
+.todo-list {
+  width: 100%;
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  box-sizing: border-box;
+}
+
+/* 📝 각 todo 아이템 */
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: var(--todo-height);
+  background-color: var(--color-text-white);
+  border-radius: var(--radious-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.todo-content {
+  display: flex;
+  align-items: center;
+}
+
+.color-dot {
+  width: var(--dot-witdh);
+  height: var(--dot-witdh);
+  border-radius: 50%;
+  margin-right: var(--spacing-sm);
+}
+
+.color-dot.priority-1 {
+  background-color: var(--color-priority-1);
+}
+
+.color-dot.priority-2 {
+  background-color: var(--color-priority-2);
+}
+
+.color-dot.priority-3 {
+  background-color: var(--color-priority-3);
+}
+
+.todo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.todo-title {
+  font-weight: var(--font-weight-semibold);
+  margin: 0;
+  font-size: var(--font-body-bold);
+}
+
+.todo-description {
+  font-size: var(--font-body);
+  color: var(--color-text-gray);
+  margin-top: var(--spacing-xs);
+}
+
+.todo-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.action-icon {
+  cursor: pointer;
+  display: block;
+  object-fit: contain;
+}
+
+.edit-button,
+.delete-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-body);
+}
+
+.edit-button {
+  color: var(--color-primary);
+  width: 23px;
+  height: 23px;
+}
+
+.delete-button {
+  color: var(--color-priority-1);
+}
+
+/* 체크 아이콘 스타일링 */
+.check-icon {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.check-incomplete {
+  /* 기본 아이콘 색상 유지 */
+}
+
+.check-complete {
+  filter: brightness(0);
+}
+
+/* 완료된 할일 항목 스타일링 */
+.completed-item {
+  background-color: #f0f0f0; /* 회색 배경 */
+  opacity: 0.8; /* 약간 투명하게 */
+}
+
+.completed-item .todo-title,
+.completed-item .todo-description {
+  color: #777; /* 텍스트 색상을 회색으로 */
+}
+
+/* 추가 버튼 */
+.add-todo-button {
+  position: absolute;
+  bottom: var(--spacing-lg);
+  right: var(--spacing-lg);
+  width: 48px;
+  height: 48px;
+  background-color: var(--color-primary);
+  color: var(--color-text-white);
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-button);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.add-todo-button:hover {
+  background-color: var(--color-text-highlight-dark);
+}
