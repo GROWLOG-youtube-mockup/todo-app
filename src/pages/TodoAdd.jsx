@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Header from '../components/Header.jsx';
 import '../style/TodoForm.css';
@@ -11,9 +12,10 @@ const PRIORITY_OPTIONS = [
 
 function TodoAdd() {
   // TODO: 이후 zustand 상태로 교체 예정
+  const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [selectedPriority, setSelectedPriority] = useState('');
+  const [selectedPriority, setSelectedPriority] = useState('medium');
 
   // TODO: 이후 zustand addTodo 등 실제 로직으로 교체 예정
   const handleSubmit = (e) => {
@@ -21,13 +23,16 @@ function TodoAdd() {
     console.log('할 일 추가 요청:', {
       title,
       description,
-      priority: selectedPriority || '중간'
+      priority: selectedPriority || 'medium'
     });
 
     // 입력값 초기화
     setTitle('');
     setDescription('');
-    setSelectedPriority('');
+    setSelectedPriority('medium');
+
+    // 메인 페이지로 이동
+    navigate('/');
   };
 
   return (
