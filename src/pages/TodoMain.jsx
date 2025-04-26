@@ -1,7 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import List from '../components/List.jsx';
+import { useTodoStore } from '../stores/useTodoStore.js';
+
 function TodoMain() {
+  const todos = useTodoStore((state) => state.todos);
+
   return (
     <div className="page-container">
       {/*작업시 삭제후 진행해주세요*/}
@@ -23,6 +28,8 @@ function TodoMain() {
         </Link>
       </div>
       {/*작업시 삭제후 진행해주세요*/}
+
+      <List todos={todos} />
     </div>
   );
 }
