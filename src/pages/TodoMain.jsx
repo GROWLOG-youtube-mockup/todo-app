@@ -52,14 +52,43 @@ function TodoMain() {
   const filters = ['전체', '진행 중', '완료됨'];
   const sortOptions = ['날짜순', '중요도순'];
 
+  const getFilteredAndSortedTodos = (todoList, activeFilter, sortOption) => {
+    let filterTodoList = todoList;
+
+    if (activeFilter !== '전체') {
+      const isComplete = activeFilter === '완료됨';
+      filterTodoList = todoList.filter((todo) => todo.isComplete === isComplete);
+    }
+
+    if (sortOption === '중요도순') {
+      const priorityOrder = {
+        high: 1,
+        medium: 2,
+        low: 3
+      };
+
+      filterTodoList = filterTodoList
+        .slice()
+        .sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]);
+    } else {
+      filterTodoList = filterTodoList
+        .slice()
+        .sort((a, b) => new Date(b.saveAt).getTime() - new Date(a.saveAt).getTime());
+    }
+
+    return filterTodoList;
+  };
+
   const toggleDropDown = () => {
     setShowDropDown(!showDropDown);
   };
 
   const handleSortChange = (option) => {
-    console.log(option, sortOption);
-
-    if (sortOption !== option) setSortOption(option);
+    if (sortOption !== option) {
+      setSortOption(option);
+      const updatedTodos = getFilteredAndSortedTodos(todoList, activeFilter, option);
+      setFilterTodos(updatedTodos);
+    }
 
     setShowDropDown(false);
   };
@@ -129,26 +158,8 @@ function TodoMain() {
   };
 
   useEffect(() => {
-    let filterTodoList = todoList;
-
-    if (activeFilter !== '전체') {
-      const isComplete = activeFilter === '완료됨';
-      filterTodoList = todoList.filter((todo) => todo.isComplete === isComplete);
-    }
-
-    if (sortOption === '중요도순') {
-      const priorityOrder = {
-        high: 1,
-        medium: 2,
-        low: 3
-      };
-
-      filterTodoList.sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]);
-    } else {
-      filterTodoList.sort((a, b) => new Date(b.saveAt).getTime() - new Date(a.saveAt).getTime());
-    }
-
-    setFilterTodos(filterTodoList);
+    const updatedTodos = getFilteredAndSortedTodos(todoList, activeFilter, sortOption);
+    setFilterTodos(updatedTodos);
   }, [todoList, activeFilter, sortOption]);
 
   return (
