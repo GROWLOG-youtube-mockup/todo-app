@@ -1,9 +1,9 @@
 import { Routes, Route } from 'react-router-dom';
 
-import TodoMain from '../pages/TodoMain';
-import TodoProfile from '../pages/TodoProfile';
-import TodoAdd from '../pages/TodoAdd';
-import TodoEdit from '../pages/TodoEdit';
+import TodoAdd from '../pages/TodoAdd.jsx';
+import TodoEdit from '../pages/TodoEdit.jsx';
+import TodoMain from '../pages/TodoMain.jsx';
+import TodoProfile from '../pages/TodoProfile.jsx';
 
 function AppRouter() {
   return (
