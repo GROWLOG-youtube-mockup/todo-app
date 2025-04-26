@@ -7,6 +7,27 @@ import { useTodoStore } from '../stores/useTodoStore.js';
 function TodoMain() {
   const todos = useTodoStore((state) => state.todos);
 
+  const handleShare = () => {
+    if (todos.length === 0) {
+      alert('공유할 할 일이 없습니다.');
+      return;
+    }
+
+    const text = todos
+      .map((todo, index) => `${index + 1}. [${todo.priority}] ${todo.title} - ${todo.description}`)
+      .join('\n');
+
+    const blob = new Blob([text], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'todo-list.txt';
+    a.click();
+
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="page-container">
       {/*작업시 삭제후 진행해주세요*/}
@@ -28,6 +49,10 @@ function TodoMain() {
         </Link>
       </div>
       {/*작업시 삭제후 진행해주세요*/}
+
+      <div>
+        <button onClick={handleShare}>BUTTON</button>
+      </div>
 
       <List todos={todos} />
     </div>
