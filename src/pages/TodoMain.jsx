@@ -4,6 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header.jsx';
 import '../style/TodoMain.css';
 
+import CheckIcon from '../assets/Check_icon.svg';
+import EditIcon from '../assets/Edit_icon.svg';
+import DeleteIcon from '../assets/Trash_icon.svg';
+
 function TodoMain() {
   // 로컬 상태
   const [activeFilter, setActiveFilter] = useState('전체');
@@ -136,15 +140,18 @@ function TodoMain() {
               </div>
             </div>
             <div className="todo-actions">
-              <button className="edit-button" onClick={() => handleEdit(todo.id)}>
-                ✏️
-              </button>
-              <button className="delete-button" onClick={() => handleDelete(todo.id)}>
-                🗑️
-              </button>
-              <button className="complete-button" onClick={() => handleToggleComplete(todo.id)}>
-                {todo.isComplete ? '✔️' : '⬜'}
-              </button>
+              <img src={EditIcon} className="edit-button" onClick={() => handleEdit(todo.id)} />
+              <img
+                src={DeleteIcon}
+                className="delete-button"
+                onClick={() => handleDelete(todo.id)}
+              />
+              <img
+                src={CheckIcon}
+                className={`check-icon ${todo.isComplete ? 'check-complete' : 'check-incomplete'}`}
+                onClick={() => handleToggleComplete(todo.id)}
+                alt="완료 체크"
+              />
             </div>
           </div>
         ))}
