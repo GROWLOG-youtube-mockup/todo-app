@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import '../style/TodoMain.css';
@@ -10,6 +10,7 @@ import { useTodoStore } from '../stores/useTodoStore.js';
 function TodoMain() {
   const navigate = useNavigate();
 
+  const [filterTodos, setFilterTodos] = useState([]);
   const [activeFilter, setActiveFilter] = useState('전체');
   const [sortOption, setSortOption] = useState('날짜순');
   const [showDropDown, setShowDropDown] = useState(false);
@@ -17,29 +18,52 @@ function TodoMain() {
   const todos = useTodoStore((state) => state.todos);
 
   // 연동 전 임시 todo 데이터(저장 시간 X)
-  const todoList = [
-    {
-      id: 1,
-      title: '스터디 과제 제출',
-      description: 'React로 Todo App 만들기',
-      priority: 'high',
-      isComplete: false
-    },
-    {
-      id: 2,
-      title: '운동 가기',
-      description: '저녁 7시에 헬스장',
-      priority: 'medium',
-      isComplete: false
-    },
-    {
-      id: 3,
-      title: '책 읽기',
-      description: 'Clean Code 2장까지',
-      priority: 'low',
-      isComplete: true
+  const todoList =
+    todos.length > 0
+      ? todos
+      : [
+          {
+            id: 1,
+            title: 'TODO 1',
+            description: 'TODO 메모',
+            saveAt: '2025-04-24T09:30:00Z',
+            isComplete: false,
+            priority: 'high'
+          },
+          {
+            id: 2,
+            title: 'TODO 2',
+            description: 'TODO 메모',
+            saveAt: '2025-04-23T09:30:00Z',
+            isComplete: false,
+            priority: 'low'
+          },
+          {
+            id: 3,
+            title: 'TODO 3',
+            description: 'TODO 메모',
+            saveAt: '2025-04-24T09:00:00Z',
+            isComplete: true,
+            priority: 'medium'
+          }
+        ];
+
+  useEffect(() => {
+    let filterTodoList = [];
+
+    if (activeFilter !== '전체') {
+      const isComplete = activeFilter === '완료됨';
+      filterTodoList = todoList.filter((todo) => todo.isComplete === isComplete);
     }
-  ];
+
+    if (sortOption === '중요도순') {
+      filterTodoList.sort((a, b) => b.priority - a.priority);
+    } else {
+      filterTodoList.sort((a, b) => b.saveAt - a.saveAt);
+    }
+
+    setFilterTodos(filterTodoList);
+  }, [filterTodos, todoList, activeFilter, sortOption]);
 
   const filters = ['전체', '진행 중', '완료됨'];
   const sortOptions = ['날짜순', '중요도순'];
@@ -165,7 +189,7 @@ function TodoMain() {
 
       {/* ToDo 목록 렌더링 */}
       <TodoList
-        todoList={todoList}
+        todoList={filterTodos}
         getPriorityColorClass={getPriorityColorClass}
         handleEdit={handleEdit}
         handleDelete={handleDelete}
