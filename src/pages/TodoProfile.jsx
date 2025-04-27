@@ -100,7 +100,9 @@ const TodoListContainer = ({ isCompleted }) => {
         filteredTodos.map((todo) => (
           <div className="todo-item">
             <div className={`priority-circle ${todo.priority}`}></div>
-            <span key={todo.id}>{todo.title}</span>
+            <span key={todo.id} className="todo-title">
+              {todo.title}
+            </span>
           </div>
         ))}
     </>

@@ -2,7 +2,7 @@
 // import { createComponent } from './utils/util.jsx';
 
 import './style/App.css';
-import AppRouter from './router/AppRouter';
+import AppRouter from './router/AppRouter.jsx';
 
 function App() {
   return (
