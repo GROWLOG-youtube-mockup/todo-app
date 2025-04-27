@@ -20,6 +20,7 @@ function TodoMain() {
 
   const todos = useTodoStore((state) => state.todos);
   const addTodo = useTodoStore((state) => state.addTodo);
+  const updateTodo = useTodoStore((state) => state.updateTodo);
 
   const getFilteredAndSortedTodos = (todoList, activeFilter, sortOption) => {
     let filterTodoList = todoList;
@@ -88,13 +89,9 @@ function TodoMain() {
     navigate('/add');
   }
 
-  function handleToggleComplete(id) {
-    console.log(id);
-    // setTodoList((prev) => {
-    //   return prev.map((todo) =>
-    //     todo.id === id ? { ...todo, isComplete: !todo.isComplete } : todo
-    //   );
-    // });
+  function handleToggleComplete(id, isComplete) {
+    const changeBoolean = !isComplete;
+    updateTodo({ id, isComplete: changeBoolean });
   }
 
   const handleShare = () => {
