@@ -94,7 +94,6 @@ function TodoMain() {
   };
 
   const handleShare = () => {
-    /* TODO: 추후 mock data 필요없을 때 수정해야 함 */
     if (todos.length < 1) {
       alert('공유할 할 일이 없습니다.');
 
