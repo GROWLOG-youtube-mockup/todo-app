@@ -15,18 +15,21 @@ const PRIORITY_OPTIONS = [
 ];
 
 function TodoAdd() {
-  // TODO: 이후 zustand 상태로 교체 예정
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [selectedPriority, setSelectedPriority] = useState('medium');
+  const [selectedPriority, setSelectedPriority] = useState('');
 
   // 서버에서 돌아온 todo를 zustand에 추가
   const addLocalTodo = useTodoStore((state) => state.addTodoRemote);
 
-  // TODO: 이후 zustand addTodo 등 실제 로직으로 교체 예정
+  // 제목과 설명, 중요도를 선택해야만 ture를 반환
+  const isFormValid = title.trim() !== '' && description.trim() !== '' && selectedPriority !== '';
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!isFormValid) return;
+
     const newTodo = {
       title,
       description,
@@ -34,9 +37,6 @@ function TodoAdd() {
       isComplete: false,
       priority: selectedPriority
     };
-
-    // 빈 공백 입력 시 페이지 이동 방지
-    if (!title.trim()) return;
 
     try {
       const resp = await fetch(`${API_URL}/todoList`, {
@@ -99,7 +99,7 @@ function TodoAdd() {
 
         <div className="empty-status-container" />
 
-        <button type="submit" className="submit-btn">
+        <button type="submit" className="submit-btn" disabled={!isFormValid}>
           추가
         </button>
       </form>
