@@ -23,13 +23,13 @@ function TodoMain() {
   const updateTodo = useTodoStore((state) => state.updateTodo);
   const removeTodo = useTodoStore((state) => state.removeTodo);
 
-  function handleEdit(id) {
+  const handleEdit = (id) => {
     navigate(`/edit/${id}`);
-  }
+  };
 
-  function handleAdd() {
+  const handleAdd = () => {
     navigate('/add');
-  }
+  };
 
   const getFilteredAndSortedTodos = (todoList, activeFilter, sortOption) => {
     let filterTodoList = todoList;
@@ -84,14 +84,14 @@ function TodoMain() {
     }
   };
 
-  function handleDelete(id) {
+  const handleDelete = (id) => {
     removeTodo(id);
-  }
+  };
 
-  function handleToggleComplete(id, isComplete) {
+  const handleToggleComplete = (id, isComplete) => {
     const changeBoolean = !isComplete;
     updateTodo({ id, isComplete: changeBoolean });
-  }
+  };
 
   const handleShare = () => {
     /* TODO: 추후 mock data 필요없을 때 수정해야 함 */
