@@ -97,17 +97,20 @@ const TodoListContainer = ({ isCompleted }) => {
         </span>
       </div>
 
-      {isOpen &&
-        filteredTodos.slice(0, loadedTodoCount).map((todo) => (
-          <div className="todo-item" key={todo.id}>
-            <div className={`priority-circle ${todo.priority}`}></div>
-            <span className="todo-title">{todo.title}</span>
-          </div>
-        ))}
-      {filteredTodos.length > 5 && (
-        <button className="btn-load-more" onClick={loadMoreTodos}>
-          더보기
-        </button>
+      {isOpen && (
+        <>
+          {filteredTodos.slice(0, loadedTodoCount).map((todo) => (
+            <div className="todo-item" key={todo.id}>
+              <div className={`priority-circle ${todo.priority}`} />
+              <span className="todo-title">{todo.title}</span>
+            </div>
+          ))}
+          {filteredTodos.length > loadedTodoCount && (
+            <button className="btn-load-more" onClick={loadMoreTodos}>
+              더보기
+            </button>
+          )}
+        </>
       )}
     </>
   );
