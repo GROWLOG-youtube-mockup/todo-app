@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import '../style/TodoMain.css';
@@ -20,38 +20,6 @@ function TodoMain() {
 
   const todos = useTodoStore((state) => state.todos);
   const addTodo = useTodoStore((state) => state.addTodo);
-
-  // 연동 전 임시 todo 데이터(저장 시간 X)
-  const todoList = useMemo(() => {
-    return todos.length > 0
-      ? todos
-      : [
-          {
-            id: 1,
-            title: 'TODO 1',
-            description: 'TODO 메모',
-            saveAt: '2025-04-22T09:30:00Z',
-            isComplete: false,
-            priority: 'high'
-          },
-          {
-            id: 2,
-            title: 'TODO 2',
-            description: 'TODO 메모',
-            saveAt: '2025-04-23T09:30:00Z',
-            isComplete: false,
-            priority: 'low'
-          },
-          {
-            id: 3,
-            title: 'TODO 3',
-            description: 'TODO 메모',
-            saveAt: '2025-04-24T09:00:00Z',
-            isComplete: true,
-            priority: 'medium'
-          }
-        ];
-  }, [todos]);
 
   const getFilteredAndSortedTodos = (todoList, activeFilter, sortOption) => {
     let filterTodoList = todoList;
@@ -87,7 +55,7 @@ function TodoMain() {
   const handleSortChange = (option) => {
     if (sortOption !== option) {
       setSortOption(option);
-      const updatedTodos = getFilteredAndSortedTodos(todoList, activeFilter, option);
+      const updatedTodos = getFilteredAndSortedTodos(todos, activeFilter, option);
       setFilterTodos(updatedTodos);
     }
 
@@ -131,21 +99,15 @@ function TodoMain() {
 
   const handleShare = () => {
     /* TODO: 추후 mock data 필요없을 때 수정해야 함 */
-    if (todoList.length < 1 && todos.todos.length < 1) {
+    if (todos.length < 1) {
       alert('공유할 할 일이 없습니다.');
 
       return;
     }
 
-    const text =
-      todoList.length > 0
-        ? todoList
-        : todos.todos
-            .map(
-              (todo, index) =>
-                `${index + 1}. [${todo.priority}] ${todo.title} - ${todo.description}`
-            )
-            .join('\n');
+    const text = todos
+      .map((todo, index) => `${index + 1}. [${todo.priority}] ${todo.title} - ${todo.description}`)
+      .join('\n');
 
     const blob = new Blob([text], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
@@ -159,6 +121,7 @@ function TodoMain() {
   };
 
   useEffect(() => {
+    /* TODO: 추후 mock data 필요없을 때 수정해야 함 */
     if (todos.length === 0) {
       const temporaryList = [
         {
@@ -191,9 +154,9 @@ function TodoMain() {
   }, [todos.length, addTodo]);
 
   useEffect(() => {
-    const updatedTodos = getFilteredAndSortedTodos(todoList, activeFilter, sortOption);
+    const updatedTodos = getFilteredAndSortedTodos(todos, activeFilter, sortOption);
     setFilterTodos(updatedTodos);
-  }, [todoList, activeFilter, sortOption]);
+  }, [todos, activeFilter, sortOption]);
 
   return (
     <div className="todo-container">
