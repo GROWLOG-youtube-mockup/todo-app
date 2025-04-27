@@ -31,7 +31,7 @@ function TodoAdd() {
       title,
       description,
       saveAt: new Date().toISOString(),
-      isComplete: true,
+      isComplete: false,
       priority: selectedPriority
     };
 
