@@ -1,6 +1,5 @@
 import React from 'react';
 
-import TodoItem from './TodoItem.jsx';
 import CheckIcon from '../assets/Check_icon.svg';
 import EditIcon from '../assets/Edit_icon.svg';
 import DeleteIcon from '../assets/Trash_icon.svg';
