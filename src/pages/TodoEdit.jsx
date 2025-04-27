@@ -60,9 +60,9 @@ function TodoEdit() {
         id: Number(id),
         title,
         description,
-        priority: selectedPriority,
+        saveAt: new Date().toISOString(),
         isComplete: selectedStatus,
-        saveAt: new Date().toISOString()
+        priority: selectedPriority
       };
 
       const res = await fetch(`${API_URL}/todoList/${id}`, {
