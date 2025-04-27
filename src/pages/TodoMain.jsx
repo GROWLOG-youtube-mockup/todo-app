@@ -10,6 +10,9 @@ import { useTodoStore } from '../stores/useTodoStore.js';
 function TodoMain() {
   const navigate = useNavigate();
 
+  const filters = ['전체', '진행 중', '완료됨'];
+  const sortOptions = ['날짜순', '중요도순'];
+
   const [filterTodos, setFilterTodos] = useState([]);
   const [activeFilter, setActiveFilter] = useState('전체');
   const [sortOption, setSortOption] = useState('날짜순');
@@ -48,9 +51,6 @@ function TodoMain() {
           }
         ];
   }, [todos]);
-
-  const filters = ['전체', '진행 중', '완료됨'];
-  const sortOptions = ['날짜순', '중요도순'];
 
   const getFilteredAndSortedTodos = (todoList, activeFilter, sortOption) => {
     let filterTodoList = todoList;
