@@ -201,7 +201,6 @@ function TodoMain() {
         </div>
       </div>
 
-      {/* ToDo 목록 렌더링 */}
       <TodoList
         todoList={filterTodos}
         getPriorityColorClass={getPriorityColorClass}
