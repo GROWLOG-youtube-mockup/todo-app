@@ -61,6 +61,7 @@ const TodoListContainer = ({ isCompleted }) => {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(true);
+  const { loadedTodoCount, loadMoreTodos } = useTabStore();
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -97,14 +98,17 @@ const TodoListContainer = ({ isCompleted }) => {
       </div>
 
       {isOpen &&
-        filteredTodos.map((todo) => (
-          <div className="todo-item">
+        filteredTodos.slice(0, loadedTodoCount).map((todo) => (
+          <div className="todo-item" key={todo.id}>
             <div className={`priority-circle ${todo.priority}`}></div>
-            <span key={todo.id} className="todo-title">
-              {todo.title}
-            </span>
+            <span className="todo-title">{todo.title}</span>
           </div>
         ))}
+      {filteredTodos.length > 5 && (
+        <button className="btn-load-more" onClick={loadMoreTodos}>
+          더보기
+        </button>
+      )}
     </>
   );
 };

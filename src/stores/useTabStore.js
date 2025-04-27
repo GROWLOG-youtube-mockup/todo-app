@@ -3,7 +3,13 @@ import { create } from 'zustand';
 
 const useTabStore = create((set) => ({
   currentTab: '할 일', // 초기 탭 설정
-  setCurrentTab: (tab) => set({ currentTab: tab })
+  setCurrentTab: (tab) => set({ currentTab: tab }),
+
+  loadedTodoCount: 5,
+  loadMoreTodos: () =>
+    set((state) => ({
+      loadedTodoCount: state.loadedTodoCount + 5
+    }))
 }));
 
 export default useTabStore;
