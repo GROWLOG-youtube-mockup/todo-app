@@ -21,6 +21,7 @@ function TodoMain() {
   const todos = useTodoStore((state) => state.todos);
   const addTodo = useTodoStore((state) => state.addTodo);
   const updateTodo = useTodoStore((state) => state.updateTodo);
+  const removeTodo = useTodoStore((state) => state.removeTodo);
 
   function handleEdit(id) {
     navigate(`/edit/${id}`);
@@ -83,10 +84,8 @@ function TodoMain() {
     }
   };
 
-  // 정렬 기능 넣기 전이라 임의로 setTodoList라고 정하고 함수 생성해 둔 것(작동 안 됨)
   function handleDelete(id) {
-    console.log(id);
-    // setTodoList((prev) => prev.filter((todo) => todo.id !== id));
+    removeTodo(id);
   }
 
   function handleToggleComplete(id, isComplete) {
