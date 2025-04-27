@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import avatarImg from '../assets/avatar.svg';
 import Header from '../components/Header.jsx';
 import useTabStore from '../stores/useTabStore.js';
 import '../style/TodoProfile.css';
+import { useTodoStore } from '../stores/useTodoStore.js';
 
 function TodoProfile() {
   const { currentTab } = useTabStore();
@@ -57,29 +58,11 @@ const TodoTab = () => {
     </>
   );
 };
+
 const TodoListContainer = ({ isCompleted }) => {
-  const [todos, setTodos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [isOpen, setIsOpen] = useState(true);
+  const todos = useTodoStore((state) => state.todos);
   const { loadedTodoCount, loadMoreTodos } = useTabStore();
-
-  useEffect(() => {
-    const fetchTodos = async () => {
-      try {
-        const res = await fetch('http://localhost:3001/todoList');
-        const data = await res.json();
-        setTodos(data);
-      } catch (err) {
-        if (err instanceof Error) console.log(err.stack);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchTodos();
-  }, []);
-
-  if (loading) return <p>Loading...</p>;
-  if (!todos || todos.length === 0) return <p>There is no data</p>;
+  const [isOpen, setIsOpen] = useState(true);
 
   const filteredTodos = todos.filter((todo) =>
     isCompleted == 'true' ? todo.isComplete : !todo.isComplete
@@ -88,6 +71,7 @@ const TodoListContainer = ({ isCompleted }) => {
     setIsOpen((prev) => !prev);
   };
 
+  console.log(todos);
   return (
     <>
       <div onClick={toggleAcordion} className="accordion-header">
