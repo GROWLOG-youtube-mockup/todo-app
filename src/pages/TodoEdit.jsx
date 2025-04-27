@@ -25,12 +25,18 @@ function TodoEdit() {
   const { id } = useParams(); // URL에서 :id 추출
   const updateLocalTodo = useTodoStore((s) => s.updateTodo);
 
-  // TODO: 이후 localStorage에서 값 불러와서 상태 초기화
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [selectedPriority, setSelectedPriority] = useState('');
-  const [selectedStatus, setSelectedStatus] = useState('');
+  const [selectedStatus, setSelectedStatus] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  // 제목과 설명, 중요도, 진행 상태를 선택해야만 ture를 반환
+  const isFormValid =
+    title.trim() !== '' &&
+    description.trim() !== '' &&
+    selectedPriority !== '' &&
+    selectedStatus !== null;
 
   // 1) 기존 Todo 로드
   useEffect(() => {
@@ -55,6 +61,8 @@ function TodoEdit() {
   // 2) 수정 제출 기능 구현
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!isFormValid) return;
+
     try {
       const payload = {
         id: Number(id),
@@ -150,7 +158,7 @@ function TodoEdit() {
           </div>
         </div>
 
-        <button type="submit" className="submit-btn">
+        <button type="submit" className="submit-btn" disabled={!isFormValid}>
           수정
         </button>
       </form>
