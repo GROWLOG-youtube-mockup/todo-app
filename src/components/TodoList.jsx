@@ -43,7 +43,7 @@ function TodoList({
             <img
               src={CheckIcon}
               className={`action-icon ${todo.isComplete ? 'check-complete' : 'check-incomplete'}`}
-              onClick={() => handleToggleComplete(todo.id)}
+              onClick={() => handleToggleComplete(todo.id, todo.isComplete)}
               alt="완료 체크"
             />
           </div>
