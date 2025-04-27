@@ -44,23 +44,29 @@ input[type='text'] {
 
 .priority-btn,
 .status-btn {
+  display: flex;
   flex: 1;
+  align-items: center;
+  justify-content: center;
   border: 1px solid #ccc;
   border-radius: 20px;
-  padding: 6px 12px;
+  padding: 6px 6px;
   background-color: white;
-  font-size: 15px;
+  font-size: 14px;
   cursor: default;
 }
 
 .red-dot {
   color: red;
+  margin-right: 4px;
 }
 .yellow-dot {
   color: orange;
+  margin-right: 4px;
 }
 .green-dot {
   color: green;
+  margin-right: 4px;
 }
 
 .priority-btn:hover,
@@ -83,6 +89,11 @@ input[type='text'] {
 .submit-btn:hover {
   background-color: #7a7cda;
   transition: background-color 0.3s ease;
+}
+
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* todoEdit css */
