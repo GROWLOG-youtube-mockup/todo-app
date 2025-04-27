@@ -19,6 +19,7 @@ function TodoMain() {
   const [showDropDown, setShowDropDown] = useState(false);
 
   const todos = useTodoStore((state) => state.todos);
+  const addTodo = useTodoStore((state) => state.addTodo);
 
   // 연동 전 임시 todo 데이터(저장 시간 X)
   const todoList = useMemo(() => {
@@ -156,6 +157,38 @@ function TodoMain() {
 
     URL.revokeObjectURL(url);
   };
+
+  useEffect(() => {
+    if (todos.length === 0) {
+      const temporaryList = [
+        {
+          id: 1,
+          title: 'TODO 1',
+          description: 'TODO 메모',
+          isComplete: false,
+          priority: 'high'
+        },
+        {
+          id: 2,
+          title: 'TODO 2',
+          description: 'TODO 메모',
+          isComplete: false,
+          priority: 'low'
+        },
+        {
+          id: 3,
+          title: 'TODO 3',
+          description: 'TODO 메모',
+          isComplete: true,
+          priority: 'medium'
+        }
+      ];
+
+      temporaryList.forEach((todoItem) => {
+        addTodo(todoItem);
+      });
+    }
+  }, [todos.length, addTodo]);
 
   useEffect(() => {
     const updatedTodos = getFilteredAndSortedTodos(todoList, activeFilter, sortOption);
