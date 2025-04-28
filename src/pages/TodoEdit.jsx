@@ -1,3 +1,5 @@
+// src/pages/TodoEdit.jsx
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -5,9 +7,7 @@ import Header from '../components/Header.jsx';
 import { useTodoStore } from '../stores/useTodoStore.js';
 import '../style/TodoForm.css';
 
-const API_URL = 'http://localhost:3001';
-
-// 중요도 옵션 (label: 화면, value: 서버/스토어)
+// 중요도 옵션 (label: 화면, value: store에 저장할 값)
 const PRIORITY_OPTIONS = [
   { label: '높음', value: 'high', colorClass: 'red-dot' },
   { label: '중간', value: 'medium', colorClass: 'yellow-dot' },
@@ -22,90 +22,51 @@ const STATUS_OPTIONS = [
 
 function TodoEdit() {
   const navigate = useNavigate();
-  const { id } = useParams(); // URL에서 :id 추출
-  const updateLocalTodo = useTodoStore((s) => s.updateTodo);
+  const { id } = useParams();
+  const todos = useTodoStore((s) => s.todos);
+  const updateTodo = useTodoStore((s) => s.updateTodo);
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [selectedPriority, setSelectedPriority] = useState('');
   const [selectedStatus, setSelectedStatus] = useState(null);
-  const [loading, setLoading] = useState(true);
 
-  // 제목과 설명, 중요도, 진행 상태를 선택해야만 ture를 반환
+  // 제목, 설명, 중요도, 상태 모두 선택되어야만 true
   const isFormValid =
     title.trim() !== '' &&
     description.trim() !== '' &&
     selectedPriority !== '' &&
     selectedStatus !== null;
 
-  // 1) 기존 Todo 로드
+  // 1) 로컬 스토어에서 해당 ID의 todo 불러오기
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await fetch(`${API_URL}/todoList/${id}`);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
-        setTitle(data.title);
-        setDescription(data.description);
-        setSelectedPriority(data.priority ?? '');
-        setSelectedStatus(!!data.isComplete);
-      } catch (err) {
-        console.error('할 일 로드 실패:', err);
-        alert('할 일 정보를 불러올 수 없습니다.');
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, [id]);
+    const todoId = Number(id);
+    const todo = todos.find((t) => t.id === todoId);
+    if (!todo) {
+      alert('해당 할 일을 찾을 수 없습니다.');
+      return navigate('/');
+    }
+    setTitle(todo.title);
+    setDescription(todo.description);
+    setSelectedStatus(todo.isComplete);
+    setSelectedPriority(todo.priority);
+  }, [id, todos, navigate]);
 
-  // 2) 수정 제출 기능 구현
-  const handleSubmit = async (e) => {
+  // 2) 수정 제출
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!isFormValid) return;
 
-    try {
-      const payload = {
-        id: Number(id),
-        title,
-        description,
-        saveAt: new Date().toISOString(),
-        isComplete: selectedStatus,
-        priority: selectedPriority
-      };
+    updateTodo({
+      id: Number(id),
+      title,
+      description,
+      isComplete: selectedStatus,
+      priority: selectedPriority
+    });
 
-      const res = await fetch(`${API_URL}/todoList/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const updated = await res.json();
-
-      // zustand 스토어에도 반영
-      updateLocalTodo({
-        id: updated.id,
-        title: updated.title,
-        description: updated.description,
-        priority: updated.priority,
-        isComplete: updated.isComplete
-      });
-
-      // 메인으로 이동
-      navigate('/');
-    } catch (err) {
-      console.error('수정 실패:', err);
-      alert('할 일 수정에 실패했습니다.');
-    }
+    navigate('/');
   };
-
-  if (loading) {
-    return (
-      <div className="page-container">
-        <Header title="TODO 편집" />
-        <p>로딩 중…</p>
-      </div>
-    );
-  }
 
   return (
     <div className="page-container">
@@ -117,6 +78,7 @@ function TodoEdit() {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
+
         <input
           type="text"
           placeholder="설명"
@@ -145,7 +107,7 @@ function TodoEdit() {
           <div className="status-options">
             {STATUS_OPTIONS.map(({ label, value }) => (
               <button
-                key={label}
+                key={value.toString()}
                 type="button"
                 className={`status-btn ${
                   value ? 'status-finished' : 'status-active'
