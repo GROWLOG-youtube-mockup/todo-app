@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; // localStorage
+// import React, { useEffect, useState } from 'react'; // 테스트용 더미데이터
 
 import avatarImg from '../assets/avatar.svg';
 import Header from '../components/Header.jsx';
@@ -60,9 +61,29 @@ const TodoTab = () => {
 };
 
 const TodoListContainer = ({ isCompleted }) => {
-  const todos = useTodoStore((state) => state.todos);
+  const todos = useTodoStore((state) => state.todos); // localStorage
   const { loadedTodoCount, loadMoreTodos, resetLoadedTodoCount } = useTabStore();
   const [isOpen, setIsOpen] = useState(true);
+
+  // 테스트용 더미데이터 불러오는 코드 (json sever 실행 필요)
+  // const [todos, setTodos] = useState([]);
+  // const [loading, setLoading] = useState(true);
+  // useEffect(() => {
+  //   const fetchTodos = async () => {
+  //     try {
+  //       const res = await fetch('http://localhost:3001/todoList');
+  //       const data = await res.json();
+  //       setTodos(data);
+  //     } catch (err) {
+  //       if (err instanceof Error) console.log(err.stack);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchTodos();
+  // }, []);
+  // if (loading) return <p>Loading...</p>;
+  // if (!todos || todos.length === 0) return <p>There is no data</p>;
 
   const filteredTodos = todos.filter((todo) =>
     isCompleted == 'true' ? todo.isComplete : !todo.isComplete
@@ -75,7 +96,6 @@ const TodoListContainer = ({ isCompleted }) => {
     setIsOpen((prev) => !prev);
   };
 
-  console.log(todos);
   return (
     <>
       <div onClick={toggleAcordion} className="accordion-header">
