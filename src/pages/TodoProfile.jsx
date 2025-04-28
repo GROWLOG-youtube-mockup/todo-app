@@ -33,18 +33,14 @@ export default TodoProfile;
 
 const TabNav = () => {
   const tabs = ['할 일', '게시글'];
-  const [currentTab, setCurrentTab] = useState('할 일');
-
-  const handleTabClick = (tab) => {
-    setCurrentTab(tab);
-  };
+  const { currentTab, setCurrentTab } = useTabStore();
 
   return (
     <nav className="profile-tabs">
       {tabs.map((tab) => (
         <button
           key={tab}
-          onClick={() => handleTabClick(tab)}
+          onClick={() => setCurrentTab(tab)}
           className={currentTab === tab ? 'tab-button currentTab' : 'tab-button'}
         >
           {tab}
