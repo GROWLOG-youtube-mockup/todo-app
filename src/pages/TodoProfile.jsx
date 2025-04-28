@@ -1,7 +1,7 @@
 import React, { useState } from 'react'; // localStorage
 // import React, { useEffect, useState } from 'react'; // 테스트용 더미데이터
 
-import avatarImg from '../assets/avatar.svg';
+import avatarImg from '../assets/avatar_profile.svg';
 import Header from '../components/Header.jsx';
 import useTabStore from '../stores/useTabStore.js';
 import '../style/TodoProfile.css';

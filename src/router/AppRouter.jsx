@@ -11,7 +11,7 @@ function AppRouter() {
       <Route path="/" element={<TodoMain />} />
       <Route path="/profile" element={<TodoProfile />} />
       <Route path="/add" element={<TodoAdd />} />
-      <Route path="/edit" element={<TodoEdit />} />
+      <Route path="/edit/:id" element={<TodoEdit />} />
     </Routes>
   );
 }
