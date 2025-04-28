@@ -104,5 +104,13 @@ const TodoListContainer = ({ isCompleted }) => {
   );
 };
 const PostsTab = () => {
-  return <div className="post-container">Posts</div>;
+  return (
+    <div className="post-container">
+      <div className="css-grid-container">
+        {Array.from({ length: 15 }, (_, index) => (
+          <div key={`cell-${index}`} className="grid-cell"></div>
+        ))}
+      </div>
+    </div>
+  );
 };

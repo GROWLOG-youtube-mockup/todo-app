@@ -164,3 +164,26 @@ span.todo-title {
   border: none;
   margin: var(--spacing-md) 0;
 }
+
+/* 게시글 및 그리드 스타일 */
+.post-container {
+  width: 100%;
+  padding-bottom: var(--spacing-md);
+}
+
+/* CSS Grid를 사용한 그리드 스타일 */
+.css-grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 화면 너비에 맞게 5개 열을 균등하게 분배 */
+  grid-auto-rows: minmax(40px, auto); /* 행 높이 자동 조정 */
+  gap: 10px; /* 셀 간격 */
+  margin-top: var(--spacing-md);
+  width: 100%; /* 컨테이너 전체 너비 사용 */
+}
+
+.grid-cell {
+  background-color: #e0e0e0;
+  border-radius: var(--radious-md);
+  aspect-ratio: 1 / 1; /* 셀을 정사각형으로 유지 */
+  min-height: 40px; /* 최소 높이 설정 */
+}
