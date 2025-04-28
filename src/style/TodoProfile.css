@@ -154,6 +154,7 @@ span.todo-title {
   white-space: nowrap;
   max-width: 35ch; /* 정확히 30자 너비 제한 */
   display: inline-block;
+  flex: 1;
 }
 
 .btn-load-more {
