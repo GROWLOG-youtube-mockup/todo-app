@@ -5,9 +5,10 @@ export const useTodoStore = create(
   persist((set, get) => ({
     todos: [],
 
-    addTodo: ({ title, description, isComplete, priority }) => {
+    addTodo: ({ id, title, description, isComplete, priority }) => {
       const newTodo = {
-        id: Date.now(),
+        /* TODO: 추후 mock data 필요없을 때 수정해야 함 */
+        id: id || Date.now(),
         title,
         description,
         saveAt: new Date().toISOString(),
