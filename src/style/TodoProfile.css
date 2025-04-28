@@ -151,10 +151,9 @@ span.todo-count {
 span.todo-title {
   overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
-  line-clamp: 2;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  white-space: nowrap;
+  max-width: 35ch; /* 정확히 30자 너비 제한 */
+  display: inline-block;
 }
 
 .btn-load-more {
