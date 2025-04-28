@@ -9,7 +9,8 @@ const useTabStore = create((set) => ({
   loadMoreTodos: () =>
     set((state) => ({
       loadedTodoCount: state.loadedTodoCount + 5
-    }))
+    })),
+  resetLoadedTodoCount: () => set({ loadedTodoCount: 5 })
 }));
 
 export default useTabStore;

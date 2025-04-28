@@ -61,13 +61,17 @@ const TodoTab = () => {
 
 const TodoListContainer = ({ isCompleted }) => {
   const todos = useTodoStore((state) => state.todos);
-  const { loadedTodoCount, loadMoreTodos } = useTabStore();
+  const { loadedTodoCount, loadMoreTodos, resetLoadedTodoCount } = useTabStore();
   const [isOpen, setIsOpen] = useState(true);
 
   const filteredTodos = todos.filter((todo) =>
     isCompleted == 'true' ? todo.isComplete : !todo.isComplete
   );
+
   const toggleAcordion = () => {
+    if (isOpen) {
+      resetLoadedTodoCount(); // 아코디언이 닫힐 때 초기화
+    }
     setIsOpen((prev) => !prev);
   };
 
