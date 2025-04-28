@@ -2,15 +2,42 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../style/Header.css';
 
-function Header({ title = 'Todo App' }) {
+import ProfileIcon from '../assets/avatar.svg';
+import ShareIcon from '../assets/share.svg';
+import ArrowIcon from '../assets/Turn_BackPage_Button.svg';
+
+function Header({
+  handleShare,
+  title = 'Todo App',
+  showBackArrow = true,
+  showProfile = false,
+  showShare = false,
+  centerTitle = false
+}) {
   return (
     <header className="header">
       <div className="header-container">
-        <Link to="/" className="arrow-left">
-          <img src="/src/assets/Turn_BackPage_Button.svg" alt="arrow-left" />
-        </Link>
+        <div className="left-group">
+          {showProfile && (
+            <Link to="/profile" className="icon profile-icon">
+              <img src={ProfileIcon} alt="Profile" className="icon-img" />
+            </Link>
+          )}
+          {showBackArrow && (
+            <Link to="/" className="arrow-left">
+              <img src={ArrowIcon} alt="Back" className="icon-img" />
+            </Link>
+          )}
+          <div className={`header-text ${centerTitle ? 'center-title' : ''}`}>{title}</div>
+        </div>
 
-        <div className="header-text">{title}</div>
+        <div className="right-icons">
+          {showShare && (
+            <div className="icon" onClick={handleShare}>
+              <img src={ShareIcon} alt="Share" className="icon-img" />
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );
