@@ -1,0 +1,126 @@
+/* 공통 부분 css 
+상태 버튼은 추가에서의 설정한 중요도 버튼과 동일한 스타일 적용용
+*/
+
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  width: 85%;
+  margin-bottom: 20px;
+}
+
+input[type='text'] {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  background: none;
+  margin-bottom: 30px;
+  padding: 8px 4px;
+  font-size: 14px;
+  outline: none;
+}
+
+.priority-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.priority-container label,
+.status-container label {
+  flex-shrink: 0;
+  width: 60px;
+  font-size: 14px;
+}
+
+.priority-options,
+.status-options {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+}
+
+.priority-btn,
+.status-btn {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 6px 6px;
+  background-color: white;
+  font-size: 14px;
+  cursor: default;
+}
+
+.red-dot {
+  color: red;
+  margin-right: 4px;
+}
+.yellow-dot {
+  color: orange;
+  margin-right: 4px;
+}
+.green-dot {
+  color: green;
+  margin-right: 4px;
+}
+
+.priority-btn:hover,
+.status-btn:hover {
+  background-color: #d9d9d9;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn {
+  background-color: #9395d3;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+  cursor: default;
+}
+
+.submit-btn:hover {
+  background-color: #7a7cda;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* todoEdit css */
+.status-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.empty-status-container {
+  margin-bottom: 80px;
+  /* 상태가 있을 시 50px 주고 상태 버튼의 사이즈가 총 30px이므로 
+  80px로 설정해서 버튼의 위치 같게 설정. */
+}
+
+.status-active {
+  color: #aaaaaa;
+}
+
+.status-finished {
+  color: #c28e8f;
+}
+
+.priority-btn.active,
+.status-btn.active {
+  border: 1px solid #000000;
+  background-color: #d9d9d9;
+}
